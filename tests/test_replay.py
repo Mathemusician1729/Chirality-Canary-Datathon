@@ -32,3 +32,18 @@ def test_replay_writes_only_day_d():
     job_tags = [t for t in tvqs if t.endswith(".Job")]
     assert len(job_tags) == 1 and len(tvqs[job_tags[0]]) == 1  # the job dated D+1 is not written
     assert not any(t.endswith(".Failure") for t in tvqs)  # failures dated D-3 and D+2 are not written
+
+
+def test_empty_read_keeps_datetime_dates():
+    """Regression: an empty block read must not turn production_date into text (broke rolling windows)."""
+    from wellwatch.score import read_window
+
+    class NoReader:  # read_window with no wells never calls the API
+        pass
+
+    empty = read_window(NoReader(), pd.DataFrame({"uwi": [], "field_operating_area": []}),
+                        pd.Timestamp("2026-07-01"), pd.Timestamp("2026-07-07"))
+    assert str(empty["production_date"].dtype) == "datetime64[ns]"
+    full = pd.DataFrame({"uwi": ["W1"], "production_date": pd.to_datetime(["2026-06-30"]), "oil_produced_m3": [1.0]})
+    both = pd.concat([full, empty], ignore_index=True)
+    assert str(both["production_date"].dtype).startswith("datetime64")

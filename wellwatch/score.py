@@ -165,13 +165,15 @@ def read_window(reader: CanaryReader, wells: pd.DataFrame, start: pd.Timestamp, 
         for tag, points in res.items():
             uwi, col = tags[tag]
             rows += [(uwi, t, col, v) for t, v in points]
-    if not rows:
-        return pd.DataFrame(columns=["uwi", "production_date"])
+    if not rows:  # keep a real datetime column so later concatenation keeps dates as dates
+        return pd.DataFrame({"uwi": pd.Series(dtype=object),
+                             "production_date": pd.Series(dtype="datetime64[ns]")})
     long = pd.DataFrame(rows, columns=["uwi", "t", "col", "v"])
     # Each 1-day interval starts at the day's stamp, so its local start date is the production date.
     long["production_date"] = (pd.to_datetime(long["t"], utc=True) - stamp).dt.tz_localize(None).dt.normalize()
     wide = long.pivot_table(index=["uwi", "production_date"], columns="col", values="v", aggfunc="last").reset_index()
     wide.columns.name = None
+    wide["production_date"] = wide["production_date"].astype("datetime64[ns]")
     return wide
 
 
@@ -288,7 +290,10 @@ class RiskEngine:
             parts.append(read_window(self.reader, new_wells, end - pd.Timedelta(days=WINDOW_DAYS), end,
                                      self.workers, self.existing))
             self.wells = pd.concat([self.wells, new_wells], ignore_index=True)
-        self.frame = pd.concat(parts, ignore_index=True).drop_duplicates(["uwi", "production_date"], keep="last")
+        parts = [p for p in parts if len(p)]
+        frame = pd.concat(parts, ignore_index=True)
+        frame["production_date"] = pd.to_datetime(frame["production_date"]).astype("datetime64[ns]")
+        self.frame = frame.drop_duplicates(["uwi", "production_date"], keep="last")
         self.frame = self.frame[self.frame["production_date"] > end - pd.Timedelta(days=WINDOW_DAYS + 1)]
 
     def score_many(self, days) -> pd.DataFrame:

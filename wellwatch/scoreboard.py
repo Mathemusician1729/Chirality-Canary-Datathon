@@ -68,8 +68,10 @@ def alert_precision(alerts: pd.DataFrame, failures: pd.DataFrame, horizon: int =
 
 def run_life(scores: pd.DataFrame, jobs: pd.DataFrame) -> pd.Series:
     """Days since the last Rod Truck / Workover job strictly before each (uwi, day)."""
-    rep = jobs[jobs["job_category"].isin(REPAIR_CATEGORIES)][["uwi", "start_date"]].dropna().sort_values("start_date")
-    left = scores[["uwi", "day"]].reset_index().sort_values("day")
+    rep = jobs[jobs["job_category"].isin(REPAIR_CATEGORIES)][["uwi", "start_date"]].dropna()
+    rep = rep.assign(start_date=rep["start_date"].astype("datetime64[ns]")).sort_values("start_date")
+    left = scores[["uwi", "day"]].reset_index()
+    left = left.assign(day=pd.to_datetime(left["day"]).astype("datetime64[ns]")).sort_values("day")
     m = pd.merge_asof(left, rep, left_on="day", right_on="start_date", by="uwi", allow_exact_matches=False)
     m = m.set_index("index").sort_index()
     return (m["day"] - m["start_date"]).dt.days
