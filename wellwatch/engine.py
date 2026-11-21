@@ -90,6 +90,7 @@ class Engine:
         """Read ``days`` from Canary in one block, score them, run alerts, write outputs back."""
         days = list(pd.DatetimeIndex(sorted(days)))
         first, last = days[0], days[-1]
+        writer.keep_alive()  # long reads below must not let the write session time out
         t0 = time.time()
         if not self.loaded:
             self.risk.load(first - pd.Timedelta(days=1))

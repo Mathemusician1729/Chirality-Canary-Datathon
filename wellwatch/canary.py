@@ -77,7 +77,8 @@ class CanaryWriter:
         self.values_written = 0
 
     def __enter__(self):
-        settings = {"clientTimeout": 600000, "autoCreateDatasets": True,
+        settings = {"clientTimeout": 300000,  # 5 min: an orphaned session releases its tags quickly
+                    "autoCreateDatasets": True,
                     "insertReplaceData": self.insert_replace, "fileSize": 8}
         data = _post(f"{self.base}/getSessionToken", {
             "apiToken": self.token, "historians": [self.historian], "clientId": self.client_id,
