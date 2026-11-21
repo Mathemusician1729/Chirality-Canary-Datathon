@@ -7,3 +7,5 @@ datasets/*.parquet
 __pycache__/
 .ipynb_checkpoints/
 cache/
+logs/
+.DS_Store
