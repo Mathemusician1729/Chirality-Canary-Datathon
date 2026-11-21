@@ -1,0 +1,4 @@
+# Large data files are stored in the UC volume, not in Git:
+# /Volumes/workspace/calgary/chirality_canary_datasets
+datasets/*.parquet
+*.parquet
