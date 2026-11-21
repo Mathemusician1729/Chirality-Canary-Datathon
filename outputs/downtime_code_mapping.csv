@@ -1,0 +1,150 @@
+downtime_code_2,downtime_code_3,problem,downtime_class
+CAPC,DEV - Capacity Constraints,Facility capacity / supply constraint,Facility constraint
+CODE13,DH - Well Torqued,Well torqued,Equipment failure
+CODE3,DH - Tubing Failure,Tubing failure,Equipment failure
+Concurrent Operations - Drilling Operations,Drilling Operations,Development / drilling / stimulation,Development
+Concurrent Ops - Completions/Workover Ops,Proximity/Safety,Development / drilling / stimulation,Development
+Concurrent Ops - Facility/Pipeline Construction,Facility/Pipeline Construction,Planned maintenance / turnaround,Planned maintenance
+Development,Capacity Constraints,Facility capacity / supply constraint,Facility constraint
+Development,EOR Off Cycle,Development / drilling / stimulation,Development
+Development,Regulatory/Compliance,Regulatory / environment / access,External
+Development,Shut-In For Drilling,Development / drilling / stimulation,Development
+Development,Shut-In For Drilling/Frac,Development / drilling / stimulation,Development
+Development,Voidage Replacement,Development / drilling / stimulation,Development
+Development,Well Stimulation,Development / drilling / stimulation,Development
+Down Hole Failure,Down Hole Failure,Other downhole problem,Equipment failure
+Downhole,Bottomhole Pump Failure,Pump failure / problems,Equipment failure
+Downhole,Rodstring Failure,Rod string failure,Equipment failure
+Downhole,Tubing Failure,Tubing failure,Equipment failure
+Downhole,Well Torqued,Well torqued,Equipment failure
+Downhole Equipment,Disposal Well Repairs,Other downhole problem,Equipment failure
+Downhole Equipment,Gas-Locking/Lost Suction,Other downhole problem,Equipment failure
+Downhole Equipment,Loaded Up,Other downhole problem,Equipment failure
+Downhole Equipment,Packer Failure,Other downhole problem,Equipment failure
+Downhole Equipment,Plunger Issues,Other downhole problem,Equipment failure
+Downhole Equipment,Pump,Pump failure / problems,Equipment failure
+Downhole Equipment,Rods,Rod string failure,Equipment failure
+Downhole Equipment,Service Rig on Hole,Other downhole problem,Equipment failure
+Downhole Equipment,Tubing Failure,Tubing failure,Equipment failure
+Downhole Equipment,Unspecified,Other downhole problem,Equipment failure
+Downhole Equipment,Waxed Up,Other downhole problem,Equipment failure
+Downhole Equipment,Well Torqued,Well torqued,Equipment failure
+ELFAIL,SURFEQ - Electrical Equipment Failure,Electrical failure,Equipment failure
+ENGDOWN,SURFEQ - Engine/Motor Down,Engine / motor down,Equipment failure
+EQT,SURFEQ - Equipment/Tie-In,Planned maintenance / turnaround,Planned maintenance
+ESD,FACILITY - ESD,Facility upset / emergency shutdown,Equipment failure
+Environment,Lease Conditions,Regulatory / environment / access,External
+Environment,Spill,Regulatory / environment / access,External
+Environment,Weather Conditions,Power outage / weather,External
+FFM,FL - Flowline Maintenance/Repairs,Flowline / pipeline problem,Equipment failure
+Facility,Compressor Down/Problems,Compressor problems,Equipment failure
+Facility,Construction/Upgrade,Planned maintenance / turnaround,Planned maintenance
+Facility,ESD,Facility upset / emergency shutdown,Equipment failure
+Facility,Equipment Malfunction,Other equipment failure,Equipment failure
+Facility,High Pipeline Pressure,Facility capacity / supply constraint,Facility constraint
+Facility,Install New Equipment,Planned maintenance / turnaround,Planned maintenance
+Facility,Lift Gas Supply Issues,Facility capacity / supply constraint,Facility constraint
+Facility,Limited Capacity,Facility capacity / supply constraint,Facility constraint
+Facility,Maintenance,Planned maintenance / turnaround,Planned maintenance
+Facility,Other Equipment Failure,Other equipment failure,Equipment failure
+Facility,Process Upset,Facility upset / emergency shutdown,Equipment failure
+Facility,Third Party Downtime,Facility capacity / supply constraint,Facility constraint
+Facility,Trucking Shortage,Facility capacity / supply constraint,Facility constraint
+Facility,Turn Around,Planned maintenance / turnaround,Planned maintenance
+Facility,Water Source Supply,Facility capacity / supply constraint,Facility constraint
+Facility Downtime,Facility Downtime,Planned maintenance / turnaround,Planned maintenance
+Flowline,Flowline Maintenance/Repairs,Flowline / pipeline problem,Equipment failure
+Flowline,Tie-In,Planned maintenance / turnaround,Planned maintenance
+Injection,Down Hole Failure,Other downhole problem,Equipment failure
+Injection,Facility Downtime,Planned maintenance / turnaround,Planned maintenance
+Injection,Long Term Shut In,Uneconomic / long-term shut-in,Economic
+Injection,Surface Equipment Failure,Other equipment failure,Equipment failure
+LCRB,SURFEQ - Lease Conditions/Road Bans,Regulatory / environment / access,External
+LTSI:1,Long Term Shut-In,Uneconomic / long-term shut-in,Economic
+Long Term Shut In,Long Term Shut In,Uneconomic / long-term shut-in,Economic
+Long Term Shut-In,Long Term Shut-In,Uneconomic / long-term shut-in,Economic
+MNT1,FACILITY - Maintenance,Planned maintenance / turnaround,Planned maintenance
+NEWEQ,FACILITY - Install New Equipment,Planned maintenance / turnaround,Planned maintenance
+Non - Op,Non-Operated Downtime,Regulatory / environment / access,External
+PLNDOTGSP,PWR - Planned Outage - By SaskPower,Power outage / weather,External
+POLY,DEV - Polymer,Development / drilling / stimulation,Development
+PUM,DH - Bottomhole Pump Failure,Pump failure / problems,Equipment failure
+Pipeline,Flowline Failure/Repairs/Maintenance,Flowline / pipeline problem,Equipment failure
+Pipeline,Hydrates/Obstruction,Flowline / pipeline problem,Equipment failure
+Pipeline,Restrictions,Facility capacity / supply constraint,Facility constraint
+Pipeline,Tie-In/Pipeline Construction,Planned maintenance / turnaround,Planned maintenance
+Planned Pad/Multi-Well Fac - Surface Eqpt Maint,Scheduled Maintenance,Planned maintenance / turnaround,Planned maintenance
+Planned Pad/Multi-Well Fac - Surface Eqpt Maint,Turn Around,Planned maintenance / turnaround,Planned maintenance
+Planned Pad/Multi-Well Facility - Pipeline,Scheduled Maintenance,Planned maintenance / turnaround,Planned maintenance
+Planned Plant Facility - Surf Equipt Maintenance,Scheduled Maintenance,Planned maintenance / turnaround,Planned maintenance
+Planned Plant Facility - Surf Equipt Maintenance,Turn Around,Planned maintenance / turnaround,Planned maintenance
+Planned Well - Surface Equipment Maintenance,Scheduled Maintenance,Planned maintenance / turnaround,Planned maintenance
+Planned Well - Workover,Artificial Lift Repair/Reconfiguration,Planned maintenance / turnaround,Planned maintenance
+Planned Well - Workover,Downhole Pressure Acquisition,Planned maintenance / turnaround,Planned maintenance
+Planned Well - Workover,Stimulation/Treatment,Development / drilling / stimulation,Development
+Power Source/Supply,Genset Failure,Electrical failure,Equipment failure
+Power Source/Supply,Planned Outage,Power outage / weather,External
+Power Source/Supply,Unplanned - Grid,Power outage / weather,External
+Power Source/Supply,Unplanned - SCRL Equipment,Power outage / weather,External
+RODSPART,DH - Rodstring Failure,Rod string failure,Equipment failure
+Regulatory,Regulatory SI/Pressure Survey/Test,Regulatory / environment / access,External
+SEM,SURFEQ - Routine Maintenance,Planned maintenance / turnaround,Planned maintenance
+SI:DRILL,DEV - Shut-In For Drilling,Development / drilling / stimulation,Development
+Sask Power/Grid,Planned Outage - By SaskPower,Power outage / weather,External
+Sask Power/Grid,Planned Outage - By Strathcona,Power outage / weather,External
+Sask Power/Grid,Unplanned Outage - Grid,Power outage / weather,External
+Sask Power/Grid,Unplanned Outage - Weather,Power outage / weather,External
+Scheduled,Maintenance,Planned maintenance / turnaround,Planned maintenance
+Scheduled,Offset Drilling/Re-Entry,Development / drilling / stimulation,Development
+Scheduled,Turn Around,Planned maintenance / turnaround,Planned maintenance
+Scheduled,Well Optimization/Stimulation,Development / drilling / stimulation,Development
+Scheduled,Workover,Planned maintenance / turnaround,Planned maintenance
+Surface Equipment,Belt Problems,Belt problems,Equipment failure
+Surface Equipment,Electrical,Electrical failure,Equipment failure
+Surface Equipment,Electrical Equipment Failure,Electrical failure,Equipment failure
+Surface Equipment,Engine/Motor Down,Engine / motor down,Equipment failure
+Surface Equipment,Equipment/Tie-In,Planned maintenance / turnaround,Planned maintenance
+Surface Equipment,High Pressure/Level Shutdown,Facility upset / emergency shutdown,Equipment failure
+Surface Equipment,Lease Conditions/Road Bans,Regulatory / environment / access,External
+Surface Equipment,Other Equipment Failure,Other equipment failure,Equipment failure
+Surface Equipment,Pump Maint/Problems/Repairs,Pump failure / problems,Equipment failure
+Surface Equipment,Routine Maintenance,Planned maintenance / turnaround,Planned maintenance
+Surface Equipment,Tie-in,Planned maintenance / turnaround,Planned maintenance
+Surface Equipment,Wellhead Drive/Stuffing,Wellhead drive / stuffing box,Equipment failure
+Surface Equipment,Wellhead Drive/Stuffing Box,Wellhead drive / stuffing box,Equipment failure
+Surface Equipment Failure,Surface Equipment Failure,Other equipment failure,Equipment failure
+TA,FACILITY - Turn Around,Planned maintenance / turnaround,Planned maintenance
+TIE,FL - Tie-In,Planned maintenance / turnaround,Planned maintenance
+UNECO,UNECO - Uneconomic,Uneconomic / long-term shut-in,Economic
+UNECO1,UNECO - Low Inflow,Uneconomic / long-term shut-in,Economic
+UNECO10,UNECO - High OPEX,Uneconomic / long-term shut-in,Economic
+UNECO2,UNECO - High Watercut,Uneconomic / long-term shut-in,Economic
+UNECO3,UNECO - Bottomhole Pump Failure,Uneconomic / long-term shut-in,Economic
+UNECO4,UNECO - Tubing Failure,Uneconomic / long-term shut-in,Economic
+UNECO5,UNECO - Well Torqued,Uneconomic / long-term shut-in,Economic
+UNECO8,UNECO - Flowline Failure,Uneconomic / long-term shut-in,Economic
+UNPLNDG,PWR - Unplanned Outage - Grid,Power outage / weather,External
+UNPLNDW,PWR - Unplanned Outage - Weather,Power outage / weather,External
+Uneconomic,Long Term Shut In,Uneconomic / long-term shut-in,Economic
+Uneconomic - Long Term,Uneconomic - Long Term,Uneconomic / long-term shut-in,Economic
+Unplanned Pad/Multi-Well Facility - Pipeline,Hydrate/Obstruction,Flowline / pipeline problem,Equipment failure
+Unplanned Pad/Multi-Well Facility - Pipeline,Pipeline/Equipment Failure,Flowline / pipeline problem,Equipment failure
+Unplanned Pad/Multi-Well Facility - Surface Upset,Equipment Failure,Other equipment failure,Equipment failure
+Unplanned Pad/Multi-Well Facility - Surface Upset,Flowline Hydrate/Obstruction,Flowline / pipeline problem,Equipment failure
+Unplanned Plant Facility - Amine Skid,Equipment Failure,Other equipment failure,Equipment failure
+Unplanned Plant Facility - Compressor,Equipment Failure,Compressor problems,Equipment failure
+Unplanned Plant Facility - Generator,Equipment Failure,Other equipment failure,Equipment failure
+Unplanned Plant Facility - Inlet Separator,Equipment Failure,Other equipment failure,Equipment failure
+Unplanned Well - Downhole,Downhole Obstruction,Other downhole problem,Equipment failure
+Unplanned Well - Downhole,Rod Pump Failure/Rod Part,Rod string failure,Equipment failure
+Unplanned Well - Downhole,Tubing Failure,Tubing failure,Equipment failure
+Unplanned Well - Facility Constraint,Capacity Constraints,Facility capacity / supply constraint,Facility constraint
+Unplanned Well - Facility Constraint,High Pipeline Pressure,Facility capacity / supply constraint,Facility constraint
+Unplanned Well - Facility Constraint,Lift Gas Supply Issues,Facility capacity / supply constraint,Facility constraint
+Unplanned Well - Surface Access,Poor Road Conditions/Road Bans,Regulatory / environment / access,External
+Unplanned Well - Surface Upset,Equipment Failure,Other equipment failure,Equipment failure
+Unplanned Well - Surface Upset,Flowline Hydrate/Obstruction,Flowline / pipeline problem,Equipment failure
+Unplanned Well - Surface Upset,Process Shutdown,Facility upset / emergency shutdown,Equipment failure
+WELLSTIM,DEV - Well Stimulation,Development / drilling / stimulation,Development
+WHSB,SURFEQ - Wellhead Drive/Stuffing Box,Wellhead drive / stuffing box,Equipment failure
+,,Unknown (no code),Unknown

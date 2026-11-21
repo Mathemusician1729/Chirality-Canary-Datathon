@@ -4,3 +4,5 @@ datasets/*.parquet
 *.parquet
 .databricks
 .vscode
+__pycache__/
+.ipynb_checkpoints/
