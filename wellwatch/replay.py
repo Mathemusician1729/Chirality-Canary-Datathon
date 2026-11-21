@@ -26,6 +26,7 @@ import pandas as pd
 from . import config, data
 from .backfill import day_stamps, well_tvqs
 from .canary import CanaryWriter
+from .lock import engine_lock
 
 STATE_FILE = config.REPO_ROOT / "cache" / "replay_state.json"
 CLOCK_TAG = f"{config.FLEET_PATH}.DataDay"
@@ -89,7 +90,7 @@ def main(argv=None) -> None:
     days = pd.date_range(start, end, freq="D")
     log.info("replaying %d days %s -> %s at %.1f s/day", len(days), start.date(), end.date(), args.seconds_per_day)
     try:
-        with CanaryWriter() as w:
+        with engine_lock("replay-feed"), CanaryWriter() as w:
             for day in days:
                 t0 = time.time()
                 n = rp.write_day(w, day)

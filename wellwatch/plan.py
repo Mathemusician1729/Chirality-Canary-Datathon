@@ -47,7 +47,10 @@ class Planner:
         # planner's expected loss is risk x this cost.
         if self.d is not None and len(sc) and "jobs" in self.__dict__:
             from .score import expected_failure_cost, failure_costs
-            costs = failure_costs(self.d, self.jobs, day)
+            memo = self.__dict__.setdefault("_cost_memo", {})
+            if day not in memo:
+                memo[day] = failure_costs(self.d, self.jobs, day)
+            costs = memo[day]
             sc["failure_cost"] = expected_failure_cost(sc["uwi"], sc["field"], costs)
             sc["expected_loss"] = sc["risk"] * sc["failure_cost"]
         return sc
@@ -55,8 +58,11 @@ class Planner:
     def settings(self, day: pd.Timestamp, **overrides) -> tuple[PlanSettings, dict]:
         """Inputs derived from records dated up to the planning day."""
         wells = self.day_scores(day)
-        inputs = derive_inputs(self.jobs[self.jobs["start_date"] <= day], wells,
-                               start=day - pd.Timedelta(days=3 * 365), end=day)
+        memo = self.__dict__.setdefault("_input_memo", {})
+        if day not in memo:
+            memo[day] = derive_inputs(self.jobs[self.jobs["start_date"] <= day], wells,
+                                      start=day - pd.Timedelta(days=3 * 365), end=day)
+        inputs = memo[day]
         s = PlanSettings(crews=inputs["crews"], centroids=inputs["centroids"],
                          proactive_hours=inputs["proactive_hours"], proactive_cost_cad=inputs["proactive_cost_cad"])
         return replace(s, **overrides), inputs

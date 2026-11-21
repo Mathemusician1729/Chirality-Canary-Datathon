@@ -23,6 +23,7 @@ from __future__ import annotations
 import argparse
 import json
 import logging
+import signal
 import time
 
 import pandas as pd
@@ -30,6 +31,7 @@ import pandas as pd
 from . import config
 from .alerts import AlertStore
 from .canary import CanaryReader, CanaryWriter
+from .lock import engine_lock
 from .replay import CLOCK_TAG, REPLAY_END, REPLAY_START, Replay, save_state as save_replay_state
 from .score import RiskEngine, write_outputs
 
@@ -37,6 +39,10 @@ STATE_FILE = config.REPO_ROOT / "cache" / "engine_state.json"
 LOG_DIR = config.REPO_ROOT / "logs"
 WARMUP_DAYS = 7
 log = logging.getLogger("wellwatch.engine")
+
+
+def _interrupt(*_):
+    raise KeyboardInterrupt  # Ctrl+Break from the app -> same clean shutdown as Ctrl+C
 
 
 def setup_logging() -> None:
@@ -197,11 +203,14 @@ def main(argv=None) -> None:
         sp.add_argument("--workers", type=int, default=config.READ_WORKERS)
     args = p.parse_args(argv)
     setup_logging()
-    if args.mode == "replay":
-        block = args.block or (7 if args.seconds_per_day == 0 else 1)
-        run_replay(args.start, args.end, args.seconds_per_day, block, args.fresh, args.workers)
-    else:
-        run_live(args.poll_seconds, args.max_block, args.workers)
+    if hasattr(signal, "SIGBREAK"):
+        signal.signal(signal.SIGBREAK, _interrupt)
+    with engine_lock(args.mode):  # only one engine/replay may write to Canary at a time
+        if args.mode == "replay":
+            block = args.block or (7 if args.seconds_per_day == 0 else 1)
+            run_replay(args.start, args.end, args.seconds_per_day, block, args.fresh, args.workers)
+        else:
+            run_live(args.poll_seconds, args.max_block, args.workers)
 
 
 if __name__ == "__main__":
