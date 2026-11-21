@@ -18,6 +18,7 @@ WRITE_API_PORT = int(os.environ.get("WELLWATCH_WRITE_PORT", "55293"))  # Store &
 # Canary installs a self-signed certificate on localhost. Set to a CA bundle path to verify.
 TLS_VERIFY: bool | str = os.environ.get("WELLWATCH_TLS_VERIFY", "false").lower() not in ("false", "0", "no")
 KEYRING_SERVICE, KEYRING_USER = "wellwatch-canary", "api_token"
+READ_WORKERS = int(os.environ.get("WELLWATCH_READ_WORKERS", "8"))  # parallel Read API requests
 CLIENT_ID = "wellwatch"
 
 # ---- Canary naming: <DataSet>.<Field>.<UWI>.<Signal>

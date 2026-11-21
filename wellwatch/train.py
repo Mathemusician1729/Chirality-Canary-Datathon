@@ -41,19 +41,39 @@ DROP_FEATURES = ["facility_name", "pcp_pump_model", "field_operating_area", "las
 ALERTS_PER_DAY = 15  # what the field crews can realistically check each day
 
 
+def crew_failure_starts(d: pd.DataFrame, jobs: pd.DataFrame) -> pd.DataFrame:
+    """Start day of every crew-needing failure: an equipment-failure downtime episode with a Rod Truck or
+    Workover job starting between 1 day before and 7 days after the episode starts.
+
+    Returns uwi, production_date (episode start), field_operating_area, episode_lost_oil_m3,
+    repair_cost_cad (field estimates of the linked jobs). Shared by training and the replay scoreboard.
+    """
+    d = d.sort_values(["uwi", "production_date"]).reset_index(drop=True)
+    eq = (d["downtime_class"] == EQUIPMENT)
+    prev_eq = eq.groupby(d["uwi"]).shift(1, fill_value=False)  # same episode logic the model was trained with
+    start = eq & ~prev_eq
+    episode = start.cumsum().where(eq)
+    lost = d.loc[eq].groupby(episode[eq])["lost_oil_m3"].sum()
+    starts = d.loc[start, ["uwi", "production_date", "field_operating_area"]].rename(columns={"production_date": "s"})
+    starts["episode_lost_oil_m3"] = episode[start].map(lost).to_numpy()
+    rep = jobs[jobs["job_category"].isin(REPAIR_CATEGORIES)][["uwi", "start_date", "field_est_total"]]
+    linked = starts.merge(rep, on="uwi")
+    linked = linked[(linked["start_date"] >= linked["s"] - pd.Timedelta(days=1))
+                    & (linked["start_date"] <= linked["s"] + pd.Timedelta(days=7))]
+    out = (linked.groupby(["uwi", "s"], observed=True)
+                 .agg(field_operating_area=("field_operating_area", "first"),
+                      episode_lost_oil_m3=("episode_lost_oil_m3", "first"),
+                      repair_cost_cad=("field_est_total", "sum"))
+                 .reset_index().rename(columns={"s": "production_date"}))
+    return out
+
+
 def add_labels(d: pd.DataFrame, jobs: pd.DataFrame) -> pd.DataFrame:
     """Label day t with 1 if a crew-needing equipment failure starts in t+1..t+7 (same well)."""
     d = d.sort_values(["uwi", "production_date"]).reset_index(drop=True)
     eq = (d["downtime_class"] == EQUIPMENT)
-    prev_eq = eq.groupby(d["uwi"]).shift(1, fill_value=False)
-    start = eq & ~prev_eq
     d["eq_down_hours"] = d["hours_down"].where(eq, 0.0)
-    starts = d.loc[start, ["uwi", "production_date"]].rename(columns={"production_date": "s"})
-    rep = jobs[jobs["job_category"].isin(REPAIR_CATEGORIES)][["uwi", "start_date"]]
-    linked = starts.merge(rep, on="uwi")
-    linked = linked[(linked["start_date"] >= linked["s"] - pd.Timedelta(days=1))
-                    & (linked["start_date"] <= linked["s"] + pd.Timedelta(days=7))]
-    starts = linked.drop_duplicates(["uwi", "s"])[["uwi", "s"]].rename(columns={"s": "production_date"})
+    starts = crew_failure_starts(d, jobs)[["uwi", "production_date"]]
     # for each row, the first episode start strictly after day t
     s = starts.rename(columns={"production_date": "next_start"}).sort_values("next_start")
     left = d[["uwi", "production_date"]].reset_index().sort_values("production_date")

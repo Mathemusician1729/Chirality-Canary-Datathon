@@ -128,18 +128,40 @@ def well_registry(as_of: pd.Timestamp, d: pd.DataFrame | None = None) -> pd.Data
     return d.sort_values("production_date").groupby("uwi", observed=True)[keep[1:]].last().reset_index()
 
 
-def read_window(reader: CanaryReader, wells: pd.DataFrame, start: pd.Timestamp, end: pd.Timestamp) -> pd.DataFrame:
-    """Daily values for production days start..end (inclusive) for every well, from Canary."""
+def existing_well_tags(reader: CanaryReader) -> set[str]:
+    """All raw well tags that exist in Canary (one browse call, ~1 s). Requesting missing tags wastes time."""
+    return set(reader.browse_tags(f"localhost.{config.DATASET_RAW}", deep=True))
+
+
+def read_window(reader: CanaryReader, wells: pd.DataFrame, start: pd.Timestamp, end: pd.Timestamp,
+                workers: int = 1, existing: set[str] | None = None) -> pd.DataFrame:
+    """Daily values for production days start..end (inclusive) for every well, from Canary.
+
+    Canary's cost is per tag per request (~9 ms), not per day of data, so read many days at once and
+    use several parallel requests (``workers``). ``existing`` skips tags that do not exist.
+    """
     stamp = pd.Timedelta(hours=config.DAILY_STAMP_UTC_HOUR)
     t0 = (start.tz_localize("UTC") + stamp).isoformat()
     t1 = (end.tz_localize("UTC") + stamp + pd.Timedelta(days=1)).isoformat()
     tags = {f"localhost.{config.tag_path(f, u, s)}": (u, config.SIGNALS[s][0])
             for u, f in zip(wells["uwi"], wells["field_operating_area"]) for s in NUMERIC_SIGNALS}
-    names = list(tags)
+    names = [t for t in tags if existing is None or t in existing]
+    chunks = [names[i:i + READ_BATCH_TAGS] for i in range(0, len(names), READ_BATCH_TAGS)]
+    readers = [reader] + [CanaryReader() for _ in range(max(workers, 1) - 1)]
+
+    def fetch(job):
+        i, chunk = job
+        return readers[i % len(readers)].get_tag_data(chunk, t0, t1, aggregate="TimeAverage2",
+                                                      interval="1d", max_size=200_000)
+
+    if workers > 1:
+        from concurrent.futures import ThreadPoolExecutor
+        with ThreadPoolExecutor(workers) as ex:
+            results = list(ex.map(fetch, enumerate(chunks)))
+    else:
+        results = [fetch(job) for job in enumerate(chunks)]
     rows = []
-    for i in range(0, len(names), READ_BATCH_TAGS):
-        chunk = names[i:i + READ_BATCH_TAGS]
-        res = reader.get_tag_data(chunk, t0, t1, aggregate="TimeAverage2", interval="1d", max_size=200_000)
+    for res in results:
         for tag, points in res.items():
             uwi, col = tags[tag]
             rows += [(uwi, t, col, v) for t, v in points]
@@ -153,9 +175,12 @@ def read_window(reader: CanaryReader, wells: pd.DataFrame, start: pd.Timestamp, 
     return wide
 
 
-def score_frame(frame: pd.DataFrame, day: pd.Timestamp, model: RiskModel, jobs, fails,
-                registry: pd.DataFrame) -> pd.DataFrame:
-    """Score wells running on `day` using a daily frame (from Canary or from files)."""
+def score_days(frame: pd.DataFrame, days, model: RiskModel, jobs, fails, registry: pd.DataFrame) -> pd.DataFrame:
+    """Score wells running on each of ``days`` from one daily frame (from Canary or from files).
+
+    Features for day t use only data up to t-1 and events dated before t, so one feature build can
+    serve several days without look-ahead. ``registry`` must be built as of the earliest day.
+    """
     f = frame.merge(registry, on="uwi", how="left", suffixes=("", "_reg"))
     for c in ["field_operating_area", "facility_name", "pcp_pump_make", "pcp_pump_model", "on_production_date",
               "pcp_pump_displacement_m3d100rpm"]:
@@ -166,14 +191,20 @@ def score_frame(frame: pd.DataFrame, day: pd.Timestamp, model: RiskModel, jobs, 
             f[c] = np.nan
     f = f.sort_values(["uwi", "production_date"]).reset_index(drop=True)
     feats = build_features(f, jobs, fails)
-    today = (f["production_date"] == day) & (f["hours_down"].fillna(1) == 0)
+    today = f["production_date"].isin(pd.DatetimeIndex(days)) & (f["hours_down"].fillna(1) == 0)
     X = feats.loc[today]
     out = f.loc[today, ["uwi", "field_operating_area", "production_date"]].copy()
     if X.empty:
-        return out.assign(risk=[])
+        return out.assign(risk=pd.Series(dtype=float), driver=pd.Series(dtype=str))
     out["risk"] = model.predict(X)
     out["driver"] = model.drivers(X)
-    return out
+    return out.reset_index(drop=True)
+
+
+def score_frame(frame: pd.DataFrame, day: pd.Timestamp, model: RiskModel, jobs, fails,
+                registry: pd.DataFrame) -> pd.DataFrame:
+    """Score wells running on `day` using a daily frame (from Canary or from files)."""
+    return score_days(frame, [day], model, jobs, fails, registry)
 
 
 def loss_per_failure(d: pd.DataFrame, as_of: pd.Timestamp) -> pd.Series:
@@ -217,38 +248,65 @@ def write_outputs(writer: CanaryWriter, out: pd.DataFrame, day: pd.Timestamp) ->
 
 
 class RiskEngine:
-    """Keeps a rolling window of daily data read from Canary and scores one day at a time."""
+    """Keeps a rolling window of daily data read from Canary and scores days as they arrive."""
 
-    def __init__(self, reader: CanaryReader | None = None):
+    def __init__(self, reader: CanaryReader | None = None, workers: int = config.READ_WORKERS):
         self.reader = reader or CanaryReader()
+        self.workers = workers
         self.model = RiskModel()
         self.d = data.oil_producers()
         self.jobs, self.fails = data.jobs(), data.failures()
         self.frame = pd.DataFrame()
+        self.wells = pd.DataFrame(columns=["uwi", "field_operating_area"])
 
-    def load(self, day: pd.Timestamp) -> None:
+    def _active(self, day: pd.Timestamp) -> pd.DataFrame:
+        """Wells producing in the 100 days up to ``day`` per the production records (as of ``day``)."""
         self.registry = well_registry(day, self.d)
         start = day - pd.Timedelta(days=WINDOW_DAYS)
         active = self.d[self.d["production_date"].between(start, day)]["uwi"].unique()
-        self.wells = self.registry[self.registry["uwi"].isin(active)]
-        self.frame = read_window(self.reader, self.wells, start, day)
+        return self.registry[self.registry["uwi"].isin(active)]
 
-    def advance(self, day: pd.Timestamp) -> None:
-        """Append one new day read from Canary and drop days older than the window."""
-        new = read_window(self.reader, self.wells, day, day)
-        self.frame = pd.concat([self.frame[self.frame["production_date"] < day], new], ignore_index=True)
-        self.frame = self.frame[self.frame["production_date"] > day - pd.Timedelta(days=WINDOW_DAYS + 1)]
+    def load(self, day: pd.Timestamp) -> None:
+        """Read the full window ending on ``day`` (inclusive)."""
+        self.wells = self._active(day)
+        self.existing = existing_well_tags(self.reader)
+        start = day - pd.Timedelta(days=WINDOW_DAYS)
+        self.frame = read_window(self.reader, self.wells, start, day, self.workers, self.existing)
 
-    def score(self, day: pd.Timestamp) -> pd.DataFrame:
-        out = score_frame(self.frame, day, self.model, self.jobs, self.fails, self.registry)
+    def advance(self, day: pd.Timestamp, end: pd.Timestamp | None = None) -> None:
+        """Append days ``day``..``end`` (default: just ``day``) read from Canary; drop days older than the window.
+
+        Wells that start producing get their whole window read once.
+        """
+        end = end or day
+        self.existing = existing_well_tags(self.reader)
+        active = self._active(end)
+        new_wells = active[~active["uwi"].isin(self.wells["uwi"])]
+        parts = [self.frame[self.frame["production_date"] < day],
+                 read_window(self.reader, self.wells, day, end, self.workers, self.existing)]
+        if len(new_wells):
+            parts.append(read_window(self.reader, new_wells, end - pd.Timedelta(days=WINDOW_DAYS), end,
+                                     self.workers, self.existing))
+            self.wells = pd.concat([self.wells, new_wells], ignore_index=True)
+        self.frame = pd.concat(parts, ignore_index=True).drop_duplicates(["uwi", "production_date"], keep="last")
+        self.frame = self.frame[self.frame["production_date"] > end - pd.Timedelta(days=WINDOW_DAYS + 1)]
+
+    def score_many(self, days) -> pd.DataFrame:
+        """Score several days. Registry and loss estimates are taken as of the earliest day (no look-ahead)."""
+        days = sorted(pd.DatetimeIndex(days))
+        first = days[0]
+        registry = well_registry(first, self.d)
+        out = score_days(self.frame, days, self.model, self.jobs, self.fails, registry)
         if out.empty:
             return out
-        well_oil, field_oil = loss_per_failure(self.d, day)
+        well_oil, field_oil = loss_per_failure(self.d, first - pd.Timedelta(days=1))
         oil = out["uwi"].map(well_oil).fillna(out["field_operating_area"].map(field_oil)).fillna(0)
-        value = data.du.oil_value_cad_per_m3([day], "base")[0]  # C$ per m3 lost (quarterly, public reports)
-        repair = REPAIR_COST_CAD
-        out["expected_loss"] = out["risk"] * (oil * value + repair)
-        return assign_levels(out)
+        value = data.du.oil_value_cad_per_m3(out["production_date"], "base")  # C$/m3 by quarter
+        out["expected_loss"] = out["risk"] * (oil * value + REPAIR_COST_CAD)
+        return pd.concat([assign_levels(g) for _, g in out.groupby("production_date")], ignore_index=True)
+
+    def score(self, day: pd.Timestamp) -> pd.DataFrame:
+        return self.score_many([day])
 
 
 def main(argv=None) -> None:
