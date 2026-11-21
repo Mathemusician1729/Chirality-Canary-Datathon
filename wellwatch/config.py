@@ -7,9 +7,42 @@ user "api_token") and read at runtime by wellwatch.canary.get_token().
 from __future__ import annotations
 
 import os
+import sys
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
+# Packaged app (PyInstaller): code, models and the oil-price table ship inside the bundle; the data folder
+# (competition parquet files, cache/, logs/, outputs/) is the repository the exe sits in, or WELLWATCH_HOME.
+FROZEN = bool(getattr(sys, "frozen", False))
+
+
+def _find_home() -> Path:
+    env = os.environ.get("WELLWATCH_HOME")
+    if env:
+        return Path(env).resolve()
+    if not FROZEN:
+        return Path(__file__).resolve().parent.parent
+    exe_dir = Path(sys.executable).resolve().parent
+    for p in (exe_dir, *exe_dir.parents):  # e.g. <repo>/dist/WellWatch/WellWatch.exe -> <repo>
+        if (p / "daily_production.parquet").exists() or (p / "cache" / "alerts.db").exists():
+            return p
+    return exe_dir
+
+
+REPO_ROOT = _find_home()
+BUNDLE_ROOT = Path(getattr(sys, "_MEIPASS", REPO_ROOT))
+
+
+def resource(rel: str) -> Path:
+    """A shipped file (models/, data/external/): the data folder's copy if present, else the bundled one."""
+    p = REPO_ROOT / rel
+    return p if p.exists() else BUNDLE_ROOT / rel
+
+
+def module_cmd(module: str, *args: str) -> list[str]:
+    """Command line that runs a WellWatch module's main(), from source or from the packaged exe."""
+    if FROZEN:
+        return [sys.executable, "--module", module, *args]
+    return [sys.executable, "-m", module, *args]
 
 # ---- Canary connection (local install by default; override with environment variables)
 CANARY_HOST = os.environ.get("WELLWATCH_CANARY_HOST", "localhost")

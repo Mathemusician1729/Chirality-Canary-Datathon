@@ -28,7 +28,7 @@ from . import config, data
 from .canary import CanaryReader, CanaryWriter
 from .features import build_features
 
-MODELS = config.REPO_ROOT / "models"
+MODELS = config.resource("models")
 WINDOW_DAYS = 100          # history needed: 90-day downtime sums + 30-day rolling windows
 READ_BATCH_TAGS = 250
 NUMERIC_SIGNALS = list(config.SIGNALS)

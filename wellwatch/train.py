@@ -23,8 +23,6 @@ import time
 import numpy as np
 import pandas as pd
 import xgboost as xgb
-from sklearn.isotonic import IsotonicRegression
-from sklearn.metrics import average_precision_score, roc_auc_score
 
 from . import config, data
 from .features import build_features
@@ -102,6 +100,7 @@ def precision_at_k(scores: np.ndarray, y: np.ndarray, dates: pd.Series, k: int) 
 
 
 def evaluate(name, scores, y, dates) -> dict:
+    from sklearn.metrics import average_precision_score, roc_auc_score  # training only (not in the packaged app)
     return {"model": name, "PR-AUC": average_precision_score(y, scores), "ROC-AUC": roc_auc_score(y, scores),
             f"precision@{ALERTS_PER_DAY}/day": precision_at_k(scores, y, dates, ALERTS_PER_DAY),
             "base rate": float(np.mean(y))}
@@ -125,6 +124,7 @@ def main() -> None:
         n_jobs=-1, random_state=42)
     model.fit(X.loc[tr], info.loc[tr, "label"])
     raw_ca = model.predict_proba(X.loc[ca])[:, 1]
+    from sklearn.isotonic import IsotonicRegression  # training only (not in the packaged app)
     iso = IsotonicRegression(out_of_bounds="clip", y_min=0, y_max=1).fit(raw_ca, info.loc[ca, "label"])
     p_te = iso.predict(model.predict_proba(X.loc[te])[:, 1])
     y_te, d_te = info.loc[te, "label"].to_numpy(), info.loc[te, "production_date"]

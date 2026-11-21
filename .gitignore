@@ -9,3 +9,7 @@ __pycache__/
 cache/
 logs/
 .DS_Store
+
+# PyInstaller output
+build/
+dist/

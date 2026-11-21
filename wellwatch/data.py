@@ -16,6 +16,9 @@ from .downtime import classify_code
 sys.path.insert(0, str(config.REPO_ROOT / "datasets"))
 import data_utils as du  # noqa: E402
 
+du.REPO_ROOT = config.REPO_ROOT  # same data folder when packaged
+du.PRICE_FILE = config.resource("data/external/oil_prices_quarterly.csv")
+
 CACHE = config.REPO_ROOT / "cache"
 OIL_FLUID_TYPES = ["Heavy Oil", "Oil"]
 DAILY_COLS = [
