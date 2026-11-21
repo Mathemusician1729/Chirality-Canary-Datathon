@@ -1,0 +1,16 @@
+,column,rule,values_set_to_nan,non_null_before
+0,tubing_pressure_kpa,"placeholder in [999999, -1, -13.79]",0,2285634.0
+1,casing_pressure_kpa,placeholder in [-1],0,2489500.0
+2,tubing_pressure_kpa,negative pressure,3,2285634.0
+3,casing_pressure_kpa,negative pressure,391,2489500.0
+4,pump_efficiency_pct,"outside [0.0, 1.5]",22000,1684781.0
+5,pcp_pump_rpm,"outside [0.0, 1000.0]",6815,2341414.0
+6,oil_produced_m3,"outside [0.0, None]",3720,3777879.0
+7,water_produced_m3,"outside [0.0, None]",10282,3776535.0
+8,gas_produced_e3m3,"outside [0.0, None]",107,3777465.0
+9,pcp_pump_rod_torque_ftlb,"> 99.9% quantile (7,316.6)",574,1301122.0
+10,pcp_pump_electric_current_a,> 99.9% quantile (463.0),804,892822.0
+11,casing_pressure_kpa,"> 99.9% quantile (7,000.0)",828,2489109.0
+12,tubing_pressure_kpa,"> 99.9% quantile (5,300.0)",1452,2285631.0
+13,pcp_pump_volume_throughput_m3d,> 99.9% quantile (855.0),2137,2166505.0
+14,lost_oil_m3,NaN -> 0 where hours_down == 0,-2107643,

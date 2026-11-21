@@ -1,0 +1,117 @@
+target,rank,feature,mean_abs_shap,direction_corr,share_of_total_shap,factor
+hours_down,1,pcp_pump_model,0.03173688,,0.1397468,Pump type
+hours_down,2,last_job_category,0.022873215,,0.100717485,Service-job history
+hours_down,3,jobs_prev_365,0.01966562,0.874401830317807,0.086593494,Service-job history
+hours_down,4,days_since_last_job,0.019001529,-0.8023371153093894,0.08366931,Service-job history
+hours_down,5,facility_name,0.016785676,,0.07391226,Location
+hours_down,6,oil_std7,0.012981001,0.7939240951097248,0.05715916,Recent oil rate
+hours_down,7,wcut_lag1,0.011604703,0.39561155619205324,0.051098917,Water cut
+hours_down,8,eff_lag1,0.01092536,-0.617244824425248,0.04810757,Pump efficiency
+hours_down,9,eff_drift7v30,0.009664383,-0.8372730996802228,0.042555116,Pump efficiency
+hours_down,10,wcut_mean30,0.00965198,0.8891487149523535,0.042500503,Water cut
+hours_down,11,rpm_mean30,0.008752881,0.8301532698959424,0.038541503,Pump speed (RPM)
+hours_down,12,rpm_mean7,0.005367951,0.7800942051660129,0.023636665,Pump speed (RPM)
+hours_down,13,tbg_p_mean30,0.004848339,0.7302053584234233,0.02134866,Tubing pressure
+hours_down,14,wcut_mean7,0.0043150526,0.6306897190986662,0.019000445,Water cut
+hours_down,15,eff_mean30,0.0034250377,0.043383574115262356,0.015081447,Pump efficiency
+hours_down,16,well_age_years,0.0032837708,-0.5885817795421202,0.014459407,Well age
+hours_down,17,pump_displacement,0.003272554,0.12427815960728056,0.014410016,Pump type
+hours_down,18,wcut_std7,0.002934161,-0.6767919008337094,0.012919973,Water cut
+hours_down,19,days_since_last_failure,0.0025232078,-0.4772354977194818,0.011110425,Failure history
+hours_down,20,eff_mean7,0.002479311,0.1013006707746941,0.010917135,Pump efficiency
+hours_down,21,tbg_p_mean7,0.002175957,0.7112082001953332,0.009581378,Tubing pressure
+hours_down,22,oil_drift7v30,0.002149345,-0.2771589398524749,0.009464197,Recent oil rate
+hours_down,23,oil_lag1,0.0018605675,-0.7058537436118962,0.008192625,Recent oil rate
+hours_down,24,torque_std7,0.0014636389,-0.811506170859355,0.006444832,Rod torque
+hours_down,25,tbg_p_drift7v30,0.0012574581,-0.10434014715945819,0.005536957,Tubing pressure
+hours_down,26,tbg_p_lag1,0.0011941968,0.39346192006785463,0.005258399,Tubing pressure
+hours_down,27,rpm_lag1,0.0011426475,0.5905810526139511,0.0050314125,Pump speed (RPM)
+hours_down,28,field_operating_area,0.001034429,,0.0045548943,Location
+hours_down,29,oil_mean7,0.0010165949,-0.77987205230288,0.004476366,Recent oil rate
+hours_down,30,torque_mean30,0.000766798,0.5074038558760473,0.0033764367,Rod torque
+hours_down,31,eff_std7,0.00069159706,0.23902798367192207,0.003045305,Pump efficiency
+hours_down,32,torque_lag1,0.0006642546,0.373354606675111,0.002924908,Rod torque
+hours_down,33,current_mean30,0.0005656978,0.605493540679731,0.0024909335,Motor current
+hours_down,34,last_job_sum_corrosion,0.0005390253,-0.5241432454662035,0.0023734868,Service-job history
+hours_down,35,csg_p_drift7v30,0.00046065717,-0.04351088979642569,0.002028409,Casing pressure
+hours_down,36,pcp_pump_make,0.00037964684,,0.0016716965,Pump type
+hours_down,37,wcut_drift7v30,0.00037311236,-0.4872904269204406,0.0016429233,Water cut
+hours_down,38,oil_mean30,0.00036100845,-0.5539674430119168,0.0015896262,Recent oil rate
+hours_down,39,last_job_sum_torque,0.00036028257,0.21805741202463658,0.00158643,Service-job history
+hours_down,40,rpm_std7,0.00028730682,-0.5928364255125403,0.0012650962,Pump speed (RPM)
+hours_down,41,torque_drift7v30,0.0002589861,-0.71168086345854,0.0011403919,Rod torque
+hours_down,42,csg_p_std7,0.00024993526,0.04083085449204338,0.0011005383,Casing pressure
+hours_down,43,tbg_p_std7,0.00023679073,0.36520519280692954,0.0010426592,Tubing pressure
+hours_down,44,rpm_drift7v30,0.00021153764,0.1406615353662365,0.00093146233,Pump speed (RPM)
+hours_down,45,last_job_sum_rod_broken,0.00019515006,0.887281966010456,0.00085930305,Service-job history
+hours_down,46,current_drift7v30,0.00017944662,0.3361505407685259,0.0007901562,Motor current
+hours_down,47,torque_mean7,0.00017827153,0.16950815025190274,0.0007849819,Rod torque
+hours_down,48,current_mean7,0.00017316428,0.05068164333289303,0.0007624932,Motor current
+hours_down,49,csg_p_mean30,0.00015138717,-0.7818525663150994,0.00066660217,Casing pressure
+hours_down,50,csg_p_lag1,0.00013830951,-0.5645330542095112,0.0006090174,Casing pressure
+hours_down,51,last_job_sum_sand,8.67962e-05,-0.28756509761945404,0.00038218917,Service-job history
+hours_down,52,current_lag1,8.486703e-05,0.12037539893016276,0.00037369446,Motor current
+hours_down,53,csg_p_mean7,7.180832e-05,-0.5990920161713508,0.00031619312,Casing pressure
+hours_down,54,current_std7,4.9443646e-05,0.01340830778177809,0.0002177149,Motor current
+hours_down,56,failures_prev_365,0.0,,0.0,Failure history
+hours_down,56,last_job_sum_stator_rotor,0.0,,0.0,Service-job history
+hours_down,56,last_job_sum_worn,0.0,,0.0,Service-job history
+hours_down,56,last_job_sum_injury,0.0,,0.0,Service-job history
+lost_oil_m3,1,oil_lag1,0.0063483864,0.810778311673431,0.1761741,Recent oil rate
+lost_oil_m3,2,days_since_last_failure,0.0062358514,0.8029524674774063,0.17305115,Failure history
+lost_oil_m3,3,pcp_pump_model,0.0040232255,,0.11164856,Pump type
+lost_oil_m3,4,jobs_prev_365,0.0019648403,0.781679215518449,0.054526296,Service-job history
+lost_oil_m3,5,last_job_category,0.001849675,,0.051330343,Service-job history
+lost_oil_m3,6,facility_name,0.0016804468,,0.04663409,Location
+lost_oil_m3,7,oil_std7,0.0016347738,0.6611013034082966,0.04536662,Recent oil rate
+lost_oil_m3,8,oil_mean7,0.0013279845,0.8455730041171782,0.036852907,Recent oil rate
+lost_oil_m3,9,failures_prev_365,0.0012526766,0.8154214269516527,0.034763034,Failure history
+lost_oil_m3,10,days_since_last_job,0.0012151815,-0.24751659781365712,0.033722512,Service-job history
+lost_oil_m3,11,well_age_years,0.0010368344,-0.5930305132122955,0.0287732,Well age
+lost_oil_m3,12,eff_drift7v30,0.0007256477,-0.7114083306052944,0.020137455,Pump efficiency
+lost_oil_m3,13,oil_mean30,0.00071075937,0.01697637386400832,0.019724287,Recent oil rate
+lost_oil_m3,14,pump_displacement,0.0004971788,0.27598107186921844,0.013797212,Pump type
+lost_oil_m3,15,rpm_lag1,0.0004917049,0.6519300845346517,0.013645306,Pump speed (RPM)
+lost_oil_m3,16,rpm_mean30,0.00048101708,0.4865700084412531,0.013348708,Pump speed (RPM)
+lost_oil_m3,17,rpm_mean7,0.0004723319,0.6826730519166659,0.013107686,Pump speed (RPM)
+lost_oil_m3,18,eff_lag1,0.00035120247,-0.11632849677675734,0.009746222,Pump efficiency
+lost_oil_m3,19,tbg_p_mean30,0.00032737388,0.7084064375049912,0.009084955,Tubing pressure
+lost_oil_m3,20,current_mean30,0.0002491207,0.6091112834814789,0.00691335,Motor current
+lost_oil_m3,21,torque_mean30,0.00022915148,0.23718849090505664,0.006359184,Rod torque
+lost_oil_m3,22,oil_drift7v30,0.0002281357,0.26766210073790875,0.0063309954,Recent oil rate
+lost_oil_m3,23,pcp_pump_make,0.00019721006,,0.0054727774,Pump type
+lost_oil_m3,24,wcut_lag1,0.00018246622,0.558064699364595,0.0050636213,Water cut
+lost_oil_m3,25,tbg_p_mean7,0.00017426038,0.6207541382514266,0.004835901,Tubing pressure
+lost_oil_m3,26,eff_std7,0.00017046042,-0.7882906460551011,0.004730448,Pump efficiency
+lost_oil_m3,27,eff_mean7,0.00016043907,-0.1179180748860095,0.004452346,Pump efficiency
+lost_oil_m3,28,eff_mean30,0.00012427605,-0.01736339565647357,0.0034487853,Pump efficiency
+lost_oil_m3,29,rpm_std7,0.00012079804,0.27262522672852485,0.0033522672,Pump speed (RPM)
+lost_oil_m3,30,torque_mean7,0.00012028519,0.16489190112976587,0.0033380352,Rod torque
+lost_oil_m3,31,wcut_std7,0.00011816862,-0.43365550758375443,0.003279298,Water cut
+lost_oil_m3,32,tbg_p_lag1,0.0001115509,0.29985988793082036,0.0030956496,Tubing pressure
+lost_oil_m3,33,current_drift7v30,0.00010477791,-0.11118033933032599,0.0029076925,Motor current
+lost_oil_m3,34,wcut_drift7v30,9.9151235e-05,-0.5524840985599673,0.0027515464,Water cut
+lost_oil_m3,35,tbg_p_drift7v30,9.46914e-05,-0.23013663635815315,0.0026277816,Tubing pressure
+lost_oil_m3,36,wcut_mean30,9.028386e-05,0.45453708806544013,0.002505468,Water cut
+lost_oil_m3,37,wcut_mean7,8.898301e-05,0.3395379549972144,0.002469368,Water cut
+lost_oil_m3,38,torque_lag1,8.772814e-05,0.5939156455225091,0.0024345443,Rod torque
+lost_oil_m3,39,field_operating_area,8.09483e-05,,0.0022463968,Location
+lost_oil_m3,40,rpm_drift7v30,6.81517e-05,0.09556679495048738,0.0018912782,Pump speed (RPM)
+lost_oil_m3,41,current_mean7,6.5655855e-05,0.39110991289591795,0.0018220161,Motor current
+lost_oil_m3,42,torque_drift7v30,6.5464585e-05,0.07312072733281236,0.0018167081,Rod torque
+lost_oil_m3,43,csg_p_drift7v30,5.699258e-05,0.16574196503635602,0.0015816014,Casing pressure
+lost_oil_m3,44,current_lag1,4.927589e-05,0.6705482845780705,0.0013674556,Motor current
+lost_oil_m3,45,csg_p_lag1,4.6111178e-05,-0.4483067016198669,0.0012796316,Casing pressure
+lost_oil_m3,46,torque_std7,4.1117113e-05,-0.2507405196700651,0.0011410413,Rod torque
+lost_oil_m3,47,csg_p_mean7,3.9480066e-05,-0.2494788097704249,0.0010956116,Casing pressure
+lost_oil_m3,48,tbg_p_std7,3.860331e-05,-0.09368759512519136,0.0010712807,Tubing pressure
+lost_oil_m3,49,csg_p_mean30,3.646119e-05,0.3900017284918388,0.0010118347,Casing pressure
+lost_oil_m3,50,current_std7,3.0224224e-05,0.02027117671392986,0.00083875266,Motor current
+lost_oil_m3,51,last_job_sum_torque,1.8499697e-05,0.5137475244098072,0.0005133852,Service-job history
+lost_oil_m3,52,csg_p_std7,6.5981785e-06,0.04582358904562647,0.0001831061,Casing pressure
+lost_oil_m3,53,last_job_sum_sand,3.8861363e-06,0.4308397841839778,0.00010784419,Service-job history
+lost_oil_m3,54,last_job_sum_worn,3.5357184e-06,0.4867338495039795,9.8119745e-05,Service-job history
+lost_oil_m3,55,last_job_sum_stator_rotor,3.078264e-06,-0.7740101408345309,8.542492e-05,Service-job history
+lost_oil_m3,56,last_job_sum_rod_broken,9.757543e-07,0.8568623288047874,2.7078166e-05,Service-job history
+lost_oil_m3,57,last_job_sum_injury,6.4226924e-07,,1.7823617e-05,Service-job history
+lost_oil_m3,58,last_job_sum_corrosion,0.0,,0.0,Service-job history

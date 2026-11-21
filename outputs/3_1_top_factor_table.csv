@@ -1,0 +1,13 @@
+factor,evidence,"share of SHAP, hours_down","share of SHAP, lost_oil_m3",strongest feature,direction,share of equipment lost oil
+Service-job history,SHAP (model),0.276181697845459,0.140428826212883,last_job_category,categorical (some categories higher risk),
+Pump type,SHAP (model),0.15582850575447083,0.13091854751110077,pcp_pump_model,categorical (some categories higher risk),
+Water cut,SHAP (model),0.12716275453567505,0.016069302335381508,wcut_lag1,higher value -> more downtime,
+Pump efficiency,SHAP (model),0.11970657110214233,0.04251525551080704,eff_lag1,lower value -> more downtime,
+Recent oil rate,SHAP (model),0.08088196814060211,0.28444892168045044,oil_std7,higher value -> more downtime,
+Location,SHAP (model),0.07846716046333313,0.04888048768043518,facility_name,categorical (some categories higher risk),
+Pump speed (RPM),SHAP (model),0.06940613687038422,0.0453452467918396,rpm_mean30,higher value -> more downtime,
+Tubing pressure,SHAP (model),0.04276805371046066,0.020715568214654922,tbg_p_mean30,higher value -> more downtime,
+Downtime code: Rod string failure,Pareto (descriptive),,,,-,0.44250503361201754
+Downtime code: Pump failure / problems,Pareto (descriptive),,,,-,0.1413865813128985
+Downtime code: Tubing failure,Pareto (descriptive),,,,-,0.11924438062815106
+Downtime code: Well torqued,Pareto (descriptive),,,,-,0.06835667026390928

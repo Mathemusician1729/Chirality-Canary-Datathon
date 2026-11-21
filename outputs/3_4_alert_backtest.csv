@@ -1,0 +1,8 @@
+,value
+holdout days,425.0
+alerts per day (avg),16.449411764705882
+equipment episodes in holdout,7321.0
+episodes with an alert in the 7 days before (recall),0.08550744433820516
+share of holdout lost oil in flagged episodes,0.13954274006607398
+alerts followed by an episode within 7 days (precision),0.25361178658274924
+base rate: running well-days followed by an episode within 7 days,0.13016

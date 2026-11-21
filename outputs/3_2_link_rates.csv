@@ -1,0 +1,9 @@
+,value
+episodes,34181
+episodes in failure-record period (from 2021-12-14),30566
+...with a linked failure record,7.8%
+episodes with a linked repair job,29.7%
+...share of lost oil in episodes with a failure record,15.8%
+...share of lost oil in episodes with a repair job,72.2%
+failure records linked to an episode,90.5%
+repair jobs linked to an episode,85.8%
