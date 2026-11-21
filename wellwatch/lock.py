@@ -21,6 +21,7 @@ import os
 from . import config
 
 LOCK_FILE = config.REPO_ROOT / "cache" / "engine.lock"
+STOP_FILE = config.REPO_ROOT / "cache" / "engine.stop"  # the app asks a running engine to stop
 
 
 class EngineBusy(RuntimeError):
@@ -81,7 +82,23 @@ def release() -> None:
 @contextlib.contextmanager
 def engine_lock(mode: str):
     acquire(mode)
+    clear_stop()  # an old stop request must not stop the new engine
     try:
         yield
     finally:
+        clear_stop()
         release()
+
+
+def request_stop() -> None:
+    """Ask the running engine to stop after the day it is on (works with no shared console)."""
+    STOP_FILE.parent.mkdir(exist_ok=True)
+    STOP_FILE.write_text(dt.datetime.now().isoformat(timespec="seconds"))
+
+
+def stop_requested() -> bool:
+    return STOP_FILE.exists()
+
+
+def clear_stop() -> None:
+    STOP_FILE.unlink(missing_ok=True)

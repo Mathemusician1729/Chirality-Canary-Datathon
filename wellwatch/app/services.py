@@ -477,29 +477,36 @@ class Services:
         LOG_FILE.parent.mkdir(exist_ok=True)
         out = open(config.REPO_ROOT / "logs" / "engine_app.out", "a", encoding="utf-8")
         env = {**os.environ, "PYTHONIOENCODING": "utf-8"}
-        return subprocess.Popen([sys.executable, "-m", "wellwatch.engine", *args], cwd=str(config.REPO_ROOT),
+        return subprocess.Popen(config.module_cmd("wellwatch.engine", *args), cwd=str(config.REPO_ROOT),
                                 stdout=out, stderr=subprocess.STDOUT, creationflags=flags, env=env)
 
     @staticmethod
-    def stop_engine(proc: subprocess.Popen | None = None, timeout: float = 60.0) -> str:
-        """Graceful stop: Ctrl+Break so the engine closes its Canary session and lock; terminate if it hangs."""
+    def stop_engine(proc: subprocess.Popen | None = None, timeout: float = 180.0) -> str:
+        """Graceful stop, so the engine closes its Canary session and the lock: a stop request it checks
+        between days (works for the packaged app and engines started elsewhere), then Ctrl+Break, then
+        terminate (only a process this app started)."""
         pid = proc.pid if proc else (lock.read_lock() or {}).get("pid")
-        if not pid:
+        if not pid or not lock.pid_alive(pid):
             return "No engine is running."
-        try:
-            os.kill(pid, signal.CTRL_BREAK_EVENT if os.name == "nt" else signal.SIGINT)
-        except OSError as exc:
-            return f"Could not signal the engine (pid {pid}): {exc}. Stop it from its own window."
-        t0 = time.time()
+        lock.request_stop()
+        t0, signalled = time.time(), False
         while time.time() - t0 < timeout:
             if not lock.pid_alive(pid):
                 lock.read_lock()  # clears the lock if the engine did not
-                return f"Engine (pid {pid}) stopped."
+                lock.clear_stop()
+                return f"Engine (pid {pid}) stopped after {time.time() - t0:.0f} s."
+            if not signalled and time.time() - t0 > timeout / 2:
+                signalled = True
+                try:
+                    os.kill(pid, signal.CTRL_BREAK_EVENT if os.name == "nt" else signal.SIGINT)
+                except OSError:
+                    pass  # no shared console: rely on the stop request / terminate
             time.sleep(0.5)
         if proc:
             proc.terminate()
-            return f"Engine (pid {pid}) did not stop in {timeout:.0f}s and was terminated."
-        return f"Engine (pid {pid}) is still running."
+            lock.clear_stop()
+            return f"Engine (pid {pid}) did not stop in {timeout:.0f} s and was terminated."
+        return f"Engine (pid {pid}) is still finishing its current block; the stop request stays in place."
 
     @staticmethod
     def tail_log(max_bytes: int = 20_000) -> str:
@@ -519,7 +526,7 @@ class Services:
 
     @staticmethod
     def run_scoreboard() -> str:
-        r = subprocess.run([sys.executable, "-m", "wellwatch.scoreboard"], cwd=str(config.REPO_ROOT),
+        r = subprocess.run(config.module_cmd("wellwatch.scoreboard"), cwd=str(config.REPO_ROOT),
                            capture_output=True, text=True, encoding="utf-8", errors="replace",
                            creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0)
         if r.returncode != 0:
@@ -529,7 +536,7 @@ class Services:
     @staticmethod
     def model_card() -> dict:
         try:
-            return json.loads((config.REPO_ROOT / "models" / "risk_7d_meta.json").read_text())
+            return json.loads((config.resource("models") / "risk_7d_meta.json").read_text())
         except (OSError, ValueError):
             return {}
 

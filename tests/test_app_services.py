@@ -163,3 +163,26 @@ def test_trend_assembly_maps_canary_points_to_days(svc):
     kinds = {(e["day"], e["kind"]) for e in tr["events"]}
     assert (pd.Timestamp("2026-07-31"), "Job") in kinds and (pd.Timestamp("2026-08-01"), "Downtime") in kinds
     assert (pd.Timestamp("2026-07-31"), "Downtime") not in kinds  # "Running" is not an event
+
+
+def test_stop_request_is_cleared_by_a_new_engine_and_stops_the_loop(tmp_path, monkeypatch):
+    from wellwatch import engine
+    monkeypatch.setattr(lock, "LOCK_FILE", tmp_path / "engine.lock")
+    monkeypatch.setattr(lock, "STOP_FILE", tmp_path / "engine.stop")
+    lock.request_stop()
+    with pytest.raises(KeyboardInterrupt):
+        engine.check_stop()
+    with lock.engine_lock("live"):  # a stale stop request must not stop a new engine
+        engine.check_stop()
+        lock.request_stop()
+        with pytest.raises(KeyboardInterrupt):
+            engine.check_stop()
+    assert not lock.stop_requested() and lock.read_lock() is None
+
+
+def test_module_command_from_source_and_packaged(monkeypatch):
+    import sys
+    assert config.module_cmd("wellwatch.engine", "live")[1:] == ["-m", "wellwatch.engine", "live"]
+    monkeypatch.setattr(config, "FROZEN", True)
+    assert config.module_cmd("wellwatch.engine", "live") == [sys.executable, "--module", "wellwatch.engine", "live"]
+    assert config.resource("models").name == "models"

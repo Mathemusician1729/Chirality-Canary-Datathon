@@ -26,7 +26,7 @@ import pandas as pd
 from . import config, data
 from .backfill import day_stamps, well_tvqs
 from .canary import CanaryWriter
-from .lock import engine_lock
+from .lock import engine_lock, stop_requested
 
 STATE_FILE = config.REPO_ROOT / "cache" / "replay_state.json"
 CLOCK_TAG = f"{config.FLEET_PATH}.DataDay"
@@ -92,6 +92,8 @@ def main(argv=None) -> None:
     try:
         with engine_lock("replay-feed"), CanaryWriter() as w:
             for day in days:
+                if stop_requested():
+                    raise KeyboardInterrupt
                 t0 = time.time()
                 n = rp.write_day(w, day)
                 w.keep_alive()

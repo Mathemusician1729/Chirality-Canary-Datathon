@@ -31,7 +31,7 @@ import pandas as pd
 from . import config
 from .alerts import AlertStore
 from .canary import CanaryReader, CanaryWriter
-from .lock import engine_lock
+from .lock import engine_lock, stop_requested
 from .replay import CLOCK_TAG, REPLAY_END, REPLAY_START, Replay, save_state as save_replay_state
 from .score import RiskEngine, write_outputs
 
@@ -43,6 +43,12 @@ log = logging.getLogger("wellwatch.engine")
 
 def _interrupt(*_):
     raise KeyboardInterrupt  # Ctrl+Break from the app -> same clean shutdown as Ctrl+C
+
+
+def check_stop() -> None:
+    """Stop request from the app (cache/engine.stop) -> same clean shutdown as Ctrl+C."""
+    if stop_requested():
+        raise KeyboardInterrupt
 
 
 def setup_logging() -> None:
@@ -109,6 +115,7 @@ class Engine:
         t_score = time.time() - t0 - t_read
         summary = {"days": len(days), "read_s": round(t_read, 1), "score_s": round(t_score, 1)}
         for day in days:
+            check_stop()  # state is saved per day, so stopping here resumes cleanly
             out = scored[scored["production_date"] == day]
             fails = self.failure_starts(day)
             counts = self.alerts.process_day(day, out, fails)
@@ -159,6 +166,7 @@ def run_replay(start, end, seconds_per_day: float, block: int, fresh: bool, work
             for i in range(0, len(feed), block):
                 chunk = feed[i:i + block]
                 for day in chunk:
+                    check_stop()
                     t0 = time.time()
                     rp.write_day(w, day)
                     time.sleep(max(0.0, seconds_per_day - (time.time() - t0)))
@@ -182,7 +190,10 @@ def run_live(poll_seconds: float, max_block: int, workers: int) -> None:
                     for i in range(0, len(todo), max_block):
                         eng.process(todo[i:i + max_block], w)
                 w.keep_alive()
-                time.sleep(poll_seconds)
+                t_end = time.time() + poll_seconds
+                while time.time() < t_end:
+                    check_stop()
+                    time.sleep(min(1.0, poll_seconds))
     except KeyboardInterrupt:
         log.info("stopped by user")
 
