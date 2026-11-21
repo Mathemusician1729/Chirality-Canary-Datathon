@@ -49,7 +49,7 @@ SIGNALS = {
 OUTPUTS = {
     "FailureRisk7d": "Calibrated probability that an equipment failure starts within 7 days",
     "RiskRank": "Rank of this well's risk among all running wells that day (1 = highest)",
-    "ExpectedLoss7d": "Risk x (value of oil lost + repair cost) for one failure, C$",
+    "ExpectedLoss7d": "Risk x expected cost of one crew-needing failure (repair + lost oil), C$",
     "AlertLevel": "0 none, 1 watch, 2 warning, 3 critical (ISA-18.2 style priorities)",
     "TopDriver": "Main reason the model flags this well, in plain words",
 }

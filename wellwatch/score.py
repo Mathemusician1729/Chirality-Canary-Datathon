@@ -2,7 +2,7 @@
 
 For a scoring day t (after day t's data has arrived), every well that ran all of day t gets:
     FailureRisk7d   calibrated probability that an equipment failure starts in t+1..t+7
-    ExpectedLoss7d  risk x (value of the oil a failure usually costs + typical repair cost), C$
+    ExpectedLoss7d  risk x expected cost of one crew-needing failure (repair + lost oil), C$
     RiskRank, AlertLevel, TopDriver
 written to Canary as WellWatch.<Field>.<UWI>.<Output>, stamped on day t.
 
@@ -221,6 +221,38 @@ def loss_per_failure(d: pd.DataFrame, as_of: pd.Timestamp) -> pd.Series:
     return well, field
 
 
+def failure_costs(d: pd.DataFrame, jobs: pd.DataFrame, as_of: pd.Timestamp, shrink: float = 3.0) -> dict:
+    """Expected C$ cost of ONE crew-needing failure per well, from failures known before ``as_of``.
+
+    cost = mean repair cost (field estimates of the linked Rod Truck / Workover jobs)
+         + mean oil lost per failure x the oil value of as_of's quarter.
+    Well means are pulled towards the field mean (``shrink`` pseudo-failures) so wells with one or two
+    failures are not over-trusted; values above the 99th percentile are capped. Only failures that
+    started at least 8 days before as_of are used, so their linked repair jobs are already on record.
+    (Historically a crew-needing failure averaged ~C$14.3k repair + ~C$5.4k lost oil.)
+    """
+    from .train import crew_failure_starts  # local import: train imports this module
+
+    f = crew_failure_starts(d[d["production_date"] <= as_of], jobs[jobs["start_date"] <= as_of])
+    f = f[f["production_date"] <= as_of - pd.Timedelta(days=8)].copy()
+    for col in ("repair_cost_cad", "episode_lost_oil_m3"):
+        f[col] = f[col].fillna(0).clip(upper=f[col].quantile(0.99))
+    value = float(data.du.oil_value_cad_per_m3([as_of], "base")[0])
+    f["cost"] = f["repair_cost_cad"] + f["episode_lost_oil_m3"] * value
+    fleet = float(f["cost"].mean())
+    by_field = f.groupby("field_operating_area", observed=True)["cost"].mean()
+    g = f.groupby("uwi", observed=True).agg(n=("cost", "size"), mean=("cost", "mean"),
+                                            field=("field_operating_area", "first"))
+    prior = g["field"].map(by_field).fillna(fleet)
+    well = (g["n"] * g["mean"] + shrink * prior) / (g["n"] + shrink)
+    return {"well": well, "field": by_field, "fleet": fleet}
+
+
+def expected_failure_cost(uwis: pd.Series, fields: pd.Series, costs: dict) -> np.ndarray:
+    """Per-row expected cost of one failure: well estimate, else field mean, else fleet mean."""
+    return (uwis.map(costs["well"]).fillna(fields.map(costs["field"])).fillna(costs["fleet"])).to_numpy(dtype=float)
+
+
 def assign_levels(out: pd.DataFrame) -> pd.DataFrame:
     """ISA-18.2-style priorities by expected loss, capped so crews are not flooded."""
     out = out.sort_values("expected_loss", ascending=False).reset_index(drop=True)
@@ -304,10 +336,9 @@ class RiskEngine:
         out = score_days(self.frame, days, self.model, self.jobs, self.fails, registry)
         if out.empty:
             return out
-        well_oil, field_oil = loss_per_failure(self.d, first - pd.Timedelta(days=1))
-        oil = out["uwi"].map(well_oil).fillna(out["field_operating_area"].map(field_oil)).fillna(0)
-        value = data.du.oil_value_cad_per_m3(out["production_date"], "base")  # C$/m3 by quarter
-        out["expected_loss"] = out["risk"] * (oil * value + REPAIR_COST_CAD)
+        costs = failure_costs(self.d, self.jobs, first - pd.Timedelta(days=1))  # known before the first day
+        out["failure_cost"] = expected_failure_cost(out["uwi"], out["field_operating_area"], costs)
+        out["expected_loss"] = out["risk"] * out["failure_cost"]
         return pd.concat([assign_levels(g) for _, g in out.groupby("production_date")], ignore_index=True)
 
     def score(self, day: pd.Timestamp) -> pd.DataFrame:
