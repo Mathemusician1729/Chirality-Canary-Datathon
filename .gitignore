@@ -6,3 +6,4 @@ datasets/*.parquet
 .vscode
 __pycache__/
 .ipynb_checkpoints/
+cache/
