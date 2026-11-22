@@ -5,6 +5,10 @@ $ErrorActionPreference = "Stop"
 Set-Location (Split-Path $PSScriptRoot -Parent)
 
 python scripts\make_icon.py build\wellwatch.ico
+if ($LASTEXITCODE -ne 0) { Write-Host "(icon not created; building with the default icon)" }
+if (Get-Process WellWatch -ErrorAction SilentlyContinue) {
+    throw "WellWatch.exe is running. Quit it (tray icon -> Quit) and build again."
+}
 python -m PyInstaller wellwatch.spec --noconfirm --clean
 if ($LASTEXITCODE -ne 0) { throw "PyInstaller failed" }
 
