@@ -71,8 +71,8 @@ named `nan` (for example `Wells.nan.<UWI>.OilRate`). They are scored normally.
 | `datasets/downtime_drivers.ipynb` | Goal analysis: downtime classes, Pareto, explanatory XGBoost + SHAP, failure cross-reference, cost, profit scenarios |
 | `datasets/*.ipynb` (others) | Per-dataset exploration |
 | `outputs/` | Presentation-ready PNG charts and CSV tables produced by `downtime_drivers.ipynb` |
-| `docs/` | ### TO ADDD |
-| `models/` | ### TO ADDD |
+| `docs/` | The project write-up and the numbers behind it (nothing here is read by the code). `RESULTS.md`: all results, charts and assumptions. `STRATHCONA_WORKFLOW.md`: how a production team would use WellWatch. `RUN_OFFLINE.md`: run the app without Canary. `VIDEO_SCRIPT_5MIN.md` / `PRESENTATION_SCRIPT_10MIN.md`: presentation scripts. `WellWatch_Code_Guide.pdf`: how every part of the code and the Canary integration work. `figures/`: the 7 result charts and `results/`: the fleet-level tables behind them (no well IDs), both made by `python -m wellwatch.analysis`. |
+| `models/` | The trained week-ahead risk model, written by `python -m wellwatch.train` and loaded by the engine (`wellwatch/score.py`): `risk_7d.json` is the XGBoost model (300 trees), `risk_7d_calibration.json` turns its raw score into a real probability (isotonic calibration), and `risk_7d_meta.json` lists the 57 input features, the training / calibration / test dates and the test-year scores (shown in the app's model card). Bundled inside the packaged app. |
 | `scripts/` | Build and create application, run `wellwatch_app.py` using the instructions from before, to run WellWatch app. |
 | `tests/` | Run tests on each WellWatch feature script found in `wellwatch` folder. |
 | `wellwatch/` | All features included to run WellWatch app, including alert prediction (`wellwatch/alerts.py`) and gurobi planner (`wellwatch/planner.py`). Application build scripts are included under `wellwatch/app`. |
