@@ -21,4 +21,3 @@
 | `datasets/downtime_drivers.ipynb` | Goal analysis: downtime classes, Pareto, explanatory XGBoost + SHAP, failure cross-reference, cost, profit scenarios |
 | `datasets/*.ipynb` (others) | Per-dataset exploration |
 | `outputs/` | Presentation-ready PNG charts and CSV tables produced by `downtime_drivers.ipynb` |
-| `ml_prep.ipynb`, `ml_beginner.ipynb` | Time-series ML tutorials (reference only) |
