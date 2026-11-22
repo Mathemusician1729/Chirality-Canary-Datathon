@@ -27,7 +27,7 @@ import time
 import numpy as np
 import pandas as pd
 
-from .. import config, lock
+from .. import backup, config, lock
 from ..alerts import OPEN_STATES, AlertStore
 from .settings import AppSettings
 
@@ -454,6 +454,28 @@ class Services:
         return paths
 
     # ------------------------------------------------------------------ engine processes
+    # ------------------------------------------------------------------ backups of the alert database
+    @staticmethod
+    def list_backups() -> pd.DataFrame:
+        return backup.list_backups()
+
+    @staticmethod
+    def backup_now() -> str:
+        path = backup.backup_alerts("manual")
+        return f"Backed up the alerts and scores to {path.name}."
+
+    def restore_backup(self, path: str) -> str:
+        info = backup.restore_backup(path)
+        self.clear_cache()
+        pre = f" The previous data was saved as {info['pre_restore_backup']}." if info["pre_restore_backup"] else ""
+        return (f"Restored {info['restored_from']}: {info['scored_days']} scored days "
+                f"({info['first_day']} to {info['last_day']}), {info['open_alerts'] + info['closed_alerts']} alerts.{pre}")
+
+    @staticmethod
+    def alert_db_summary() -> dict:
+        """What "Start fresh" would delete."""
+        return backup.db_summary()
+
     @staticmethod
     def engine_status() -> dict | None:
         return lock.read_lock()
