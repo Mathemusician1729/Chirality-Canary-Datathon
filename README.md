@@ -3,6 +3,8 @@
 **WellWatch** warns a week ahead of crew-needing well failures and plans crew visits to minimise the
 expected loss, running on Canary Labs historian data. **Results, charts and the profit estimate:
 [docs/RESULTS.md](docs/RESULTS.md).**
+How a production team would use it day to day, and why each feature helps:
+[docs/STRATHCONA_WORKFLOW.md](docs/STRATHCONA_WORKFLOW.md).
 
 ## WellWatch
 
