@@ -282,6 +282,36 @@ def extract_failure_depth(failures: pd.DataFrame, verbose: bool = True) -> pd.Da
     return out
 
 
+# --------------------------------------------------------------------------- oil value
+# Built from public Strathcona and Cenovus reports by datasets/build_oil_prices.py.
+# See data/external/README.md for sources, method and validation.
+PRICE_FILE = REPO_ROOT / "data" / "external" / "oil_prices_quarterly.csv"
+BBL_PER_M3 = 6.2898
+VALUE_CASES = ("low", "base", "high")  # field netback / cash margin lost / revenue lost
+
+
+def load_oil_prices() -> pd.DataFrame:
+    """Quarterly heavy-oil prices and value of a lost barrel (C$), 2021Q1-2026Q4."""
+    return pd.read_csv(PRICE_FILE, parse_dates=["period_start", "period_end"])
+
+
+def oil_value_cad_per_m3(dates, case: str = "base") -> np.ndarray:
+    """C$ value of one lost m³ of oil on each date, looked up by calendar quarter.
+
+    ``case``: "low" (field netback), "base" (cash margin lost: price minus royalties,
+    transportation and energy cost) or "high" (revenue lost).
+    """
+    if case not in VALUE_CASES:
+        raise ValueError(f"case must be one of {VALUE_CASES}, got {case!r}")
+    table = load_oil_prices().set_index("quarter")[f"value_{case}_cad_m3"]
+    quarters = pd.PeriodIndex(pd.to_datetime(pd.Series(dates)), freq="Q").astype(str)
+    values = table.reindex(quarters).to_numpy(dtype=float)
+    if np.isnan(values).any():
+        bad = sorted(set(quarters[np.isnan(values)]))
+        raise ValueError(f"No oil value for quarter(s) {bad}; the table covers {table.index[0]}-{table.index[-1]}")
+    return values
+
+
 # --------------------------------------------------------------------------- filters
 def producers_only(daily: pd.DataFrame) -> pd.DataFrame:
     """Rows where ``flow_direction == 'production'`` (injectors excluded)."""

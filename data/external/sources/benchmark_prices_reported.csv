@@ -1,0 +1,260 @@
+source_id,period,period_type,period_start,period_end,metric,value,unit,value_as_printed,notes
+SCR_Q4_2023,2023Q4,quarter,2023-10-01,2023-12-31,wti_usd_bbl,78.32,US$/bbl,78.32,
+SCR_Q4_2023,2022Q4,quarter,2022-10-01,2022-12-31,wti_usd_bbl,82.65,US$/bbl,82.65,
+SCR_Q4_2023,2023Q3,quarter,2023-07-01,2023-09-30,wti_usd_bbl,82.26,US$/bbl,82.26,
+SCR_Q4_2023,FY2023,year,2023-01-01,2023-12-31,wti_usd_bbl,77.62,US$/bbl,77.62,
+SCR_Q4_2023,FY2022,year,2022-01-01,2022-12-31,wti_usd_bbl,94.23,US$/bbl,94.23,
+SCR_Q4_2023,2023Q4,quarter,2023-10-01,2023-12-31,wcs_cad_bbl,76.85,C$/bbl,76.85,
+SCR_Q4_2023,2022Q4,quarter,2022-10-01,2022-12-31,wcs_cad_bbl,77.4,C$/bbl,77.4,
+SCR_Q4_2023,2023Q3,quarter,2023-07-01,2023-09-30,wcs_cad_bbl,93.04,C$/bbl,93.04,
+SCR_Q4_2023,FY2023,year,2023-01-01,2023-12-31,wcs_cad_bbl,79.51,C$/bbl,79.51,
+SCR_Q4_2023,FY2022,year,2022-01-01,2022-12-31,wcs_cad_bbl,98.51,C$/bbl,98.51,
+SCR_Q3_2024,2024Q3,quarter,2024-07-01,2024-09-30,wti_usd_bbl,75.1,US$/bbl,75.1,
+SCR_Q3_2024,2023Q3,quarter,2023-07-01,2023-09-30,wti_usd_bbl,82.26,US$/bbl,82.26,
+SCR_Q3_2024,2024Q2,quarter,2024-04-01,2024-06-30,wti_usd_bbl,80.57,US$/bbl,80.57,
+SCR_Q3_2024,9M2024,9M,2024-01-01,2024-09-30,wti_usd_bbl,77.54,US$/bbl,77.54,
+SCR_Q3_2024,9M2023,9M,2023-01-01,2023-09-30,wti_usd_bbl,77.39,US$/bbl,77.39,
+SCR_Q3_2024,2024Q3,quarter,2024-07-01,2024-09-30,wcs_cad_bbl,83.96,C$/bbl,83.96,
+SCR_Q3_2024,2023Q3,quarter,2023-07-01,2023-09-30,wcs_cad_bbl,93.04,C$/bbl,93.04,
+SCR_Q3_2024,2024Q2,quarter,2024-04-01,2024-06-30,wcs_cad_bbl,91.63,C$/bbl,91.63,
+SCR_Q3_2024,9M2024,9M,2024-01-01,2024-09-30,wcs_cad_bbl,84.45,C$/bbl,84.45,
+SCR_Q3_2024,9M2023,9M,2023-01-01,2023-09-30,wcs_cad_bbl,80.4,C$/bbl,80.4,
+SCR_Q4_2024,2024Q4,quarter,2024-10-01,2024-12-31,wti_usd_bbl,70.27,US$/bbl,70.27,
+SCR_Q4_2024,2023Q4,quarter,2023-10-01,2023-12-31,wti_usd_bbl,78.32,US$/bbl,78.32,
+SCR_Q4_2024,2024Q3,quarter,2024-07-01,2024-09-30,wti_usd_bbl,75.1,US$/bbl,75.1,
+SCR_Q4_2024,FY2024,year,2024-01-01,2024-12-31,wti_usd_bbl,75.72,US$/bbl,75.72,
+SCR_Q4_2024,FY2023,year,2023-01-01,2023-12-31,wti_usd_bbl,77.62,US$/bbl,77.62,
+SCR_Q4_2024,2024Q4,quarter,2024-10-01,2024-12-31,wcs_cad_bbl,80.75,C$/bbl,80.75,
+SCR_Q4_2024,2023Q4,quarter,2023-10-01,2023-12-31,wcs_cad_bbl,76.85,C$/bbl,76.85,
+SCR_Q4_2024,2024Q3,quarter,2024-07-01,2024-09-30,wcs_cad_bbl,83.96,C$/bbl,83.96,
+SCR_Q4_2024,FY2024,year,2024-01-01,2024-12-31,wcs_cad_bbl,83.53,C$/bbl,83.53,
+SCR_Q4_2024,FY2023,year,2023-01-01,2023-12-31,wcs_cad_bbl,79.51,C$/bbl,79.51,
+SCR_Q1_2025,2025Q1,quarter,2025-01-01,2025-03-31,wti_usd_bbl,71.42,US$/bbl,71.42,
+SCR_Q1_2025,2024Q1,quarter,2024-01-01,2024-03-31,wti_usd_bbl,76.96,US$/bbl,76.96,
+SCR_Q1_2025,2024Q4,quarter,2024-10-01,2024-12-31,wti_usd_bbl,70.27,US$/bbl,70.27,
+SCR_Q1_2025,2025Q1,quarter,2025-01-01,2025-03-31,wcs_cad_bbl,84.3,C$/bbl,84.3,
+SCR_Q1_2025,2024Q1,quarter,2024-01-01,2024-03-31,wcs_cad_bbl,77.77,C$/bbl,77.77,
+SCR_Q1_2025,2024Q4,quarter,2024-10-01,2024-12-31,wcs_cad_bbl,80.75,C$/bbl,80.75,
+SCR_Q2_2025,2025Q2,quarter,2025-04-01,2025-06-30,wti_usd_bbl,63.74,US$/bbl,63.74,
+SCR_Q2_2025,2024Q2,quarter,2024-04-01,2024-06-30,wti_usd_bbl,80.57,US$/bbl,80.57,
+SCR_Q2_2025,2025Q1,quarter,2025-01-01,2025-03-31,wti_usd_bbl,71.42,US$/bbl,71.42,
+SCR_Q2_2025,6M2025,6M,2025-01-01,2025-06-30,wti_usd_bbl,67.58,US$/bbl,67.58,
+SCR_Q2_2025,6M2024,6M,2024-01-01,2024-06-30,wti_usd_bbl,78.76,US$/bbl,78.76,
+SCR_Q2_2025,2025Q2,quarter,2025-04-01,2025-06-30,wcs_cad_bbl,73.96,C$/bbl,73.96,
+SCR_Q2_2025,2024Q2,quarter,2024-04-01,2024-06-30,wcs_cad_bbl,91.63,C$/bbl,91.63,
+SCR_Q2_2025,2025Q1,quarter,2025-01-01,2025-03-31,wcs_cad_bbl,84.3,C$/bbl,84.3,
+SCR_Q2_2025,6M2025,6M,2025-01-01,2025-06-30,wcs_cad_bbl,79.13,C$/bbl,79.13,
+SCR_Q2_2025,6M2024,6M,2024-01-01,2024-06-30,wcs_cad_bbl,84.7,C$/bbl,84.7,
+SCR_Q3_2025,2025Q3,quarter,2025-07-01,2025-09-30,wti_usd_bbl,64.93,US$/bbl,64.93,
+SCR_Q3_2025,2024Q3,quarter,2024-07-01,2024-09-30,wti_usd_bbl,75.1,US$/bbl,75.1,
+SCR_Q3_2025,2025Q2,quarter,2025-04-01,2025-06-30,wti_usd_bbl,63.74,US$/bbl,63.74,
+SCR_Q3_2025,9M2025,9M,2025-01-01,2025-09-30,wti_usd_bbl,66.7,US$/bbl,66.7,
+SCR_Q3_2025,9M2024,9M,2024-01-01,2024-09-30,wti_usd_bbl,77.54,US$/bbl,77.54,
+SCR_Q3_2025,2025Q3,quarter,2025-07-01,2025-09-30,wcs_cad_bbl,75.1,C$/bbl,75.1,
+SCR_Q3_2025,2024Q3,quarter,2024-07-01,2024-09-30,wcs_cad_bbl,83.96,C$/bbl,83.96,
+SCR_Q3_2025,2025Q2,quarter,2025-04-01,2025-06-30,wcs_cad_bbl,73.96,C$/bbl,73.96,
+SCR_Q3_2025,9M2025,9M,2025-01-01,2025-09-30,wcs_cad_bbl,77.79,C$/bbl,77.79,
+SCR_Q3_2025,9M2024,9M,2024-01-01,2024-09-30,wcs_cad_bbl,84.45,C$/bbl,84.45,
+SCR_Q2_2026,2026Q2,quarter,2026-04-01,2026-06-30,wti_usd_bbl,92.77,US$/bbl,92.77,
+SCR_Q2_2026,2025Q2,quarter,2025-04-01,2025-06-30,wti_usd_bbl,63.74,US$/bbl,63.74,
+SCR_Q2_2026,2026Q1,quarter,2026-01-01,2026-03-31,wti_usd_bbl,71.93,US$/bbl,71.93,
+SCR_Q2_2026,6M2026,6M,2026-01-01,2026-06-30,wti_usd_bbl,82.35,US$/bbl,82.35,
+SCR_Q2_2026,6M2025,6M,2025-01-01,2025-06-30,wti_usd_bbl,67.58,US$/bbl,67.58,
+SCR_Q2_2026,2026Q2,quarter,2026-04-01,2026-06-30,wcs_cad_bbl,107.95,C$/bbl,107.95,
+SCR_Q2_2026,2025Q2,quarter,2025-04-01,2025-06-30,wcs_cad_bbl,73.96,C$/bbl,73.96,
+SCR_Q2_2026,2026Q1,quarter,2026-01-01,2026-03-31,wcs_cad_bbl,79.23,C$/bbl,79.23,
+SCR_Q2_2026,6M2026,6M,2026-01-01,2026-06-30,wcs_cad_bbl,93.59,C$/bbl,93.59,
+SCR_Q2_2026,6M2025,6M,2025-01-01,2025-06-30,wcs_cad_bbl,79.13,C$/bbl,79.13,
+SCR_Q3_2026,2026Q3,quarter,2026-07-01,2026-09-30,wti_usd_bbl,85.79,US$/bbl,85.79,
+SCR_Q3_2026,2025Q3,quarter,2025-07-01,2025-09-30,wti_usd_bbl,64.93,US$/bbl,64.93,
+SCR_Q3_2026,2026Q2,quarter,2026-04-01,2026-06-30,wti_usd_bbl,92.77,US$/bbl,92.77,
+SCR_Q3_2026,9M2026,9M,2026-01-01,2026-09-30,wti_usd_bbl,83.5,US$/bbl,83.5,
+SCR_Q3_2026,9M2025,9M,2025-01-01,2025-09-30,wti_usd_bbl,66.7,US$/bbl,66.7,
+SCR_Q3_2026,2026Q3,quarter,2026-07-01,2026-09-30,wcs_cad_bbl,100.56,C$/bbl,100.56,
+SCR_Q3_2026,2025Q3,quarter,2025-07-01,2025-09-30,wcs_cad_bbl,75.1,C$/bbl,75.1,
+SCR_Q3_2026,2026Q2,quarter,2026-04-01,2026-06-30,wcs_cad_bbl,107.95,C$/bbl,107.95,
+SCR_Q3_2026,9M2026,9M,2026-01-01,2026-09-30,wcs_cad_bbl,95.91,C$/bbl,95.91,
+SCR_Q3_2026,9M2025,9M,2025-01-01,2025-09-30,wcs_cad_bbl,77.79,C$/bbl,77.79,
+SCR_MDA_FY2024,2024Q4,quarter,2024-10-01,2024-12-31,wti_usd_bbl,70.27,US$/bbl,70.27,
+SCR_MDA_FY2024,2023Q4,quarter,2023-10-01,2023-12-31,wti_usd_bbl,78.32,US$/bbl,78.32,
+SCR_MDA_FY2024,2024Q3,quarter,2024-07-01,2024-09-30,wti_usd_bbl,75.1,US$/bbl,75.1,
+SCR_MDA_FY2024,FY2024,year,2024-01-01,2024-12-31,wti_usd_bbl,75.72,US$/bbl,75.72,
+SCR_MDA_FY2024,FY2023,year,2023-01-01,2023-12-31,wti_usd_bbl,77.62,US$/bbl,77.62,
+SCR_MDA_FY2024,2024Q4,quarter,2024-10-01,2024-12-31,wcs_usd_bbl,57.72,US$/bbl,57.72,
+SCR_MDA_FY2024,2023Q4,quarter,2023-10-01,2023-12-31,wcs_usd_bbl,56.43,US$/bbl,56.43,
+SCR_MDA_FY2024,2024Q3,quarter,2024-07-01,2024-09-30,wcs_usd_bbl,61.55,US$/bbl,61.55,
+SCR_MDA_FY2024,FY2024,year,2024-01-01,2024-12-31,wcs_usd_bbl,60.97,US$/bbl,60.97,
+SCR_MDA_FY2024,FY2023,year,2023-01-01,2023-12-31,wcs_usd_bbl,58.92,US$/bbl,58.92,
+SCR_MDA_FY2024,2024Q4,quarter,2024-10-01,2024-12-31,wti_wcs_diff_usd_bbl,12.55,US$/bbl,-12.55,printed as WTI-WCS differential with a negative sign (WCS discount); stored as a positive discount
+SCR_MDA_FY2024,2023Q4,quarter,2023-10-01,2023-12-31,wti_wcs_diff_usd_bbl,21.89,US$/bbl,-21.89,printed as WTI-WCS differential with a negative sign (WCS discount); stored as a positive discount
+SCR_MDA_FY2024,2024Q3,quarter,2024-07-01,2024-09-30,wti_wcs_diff_usd_bbl,13.55,US$/bbl,-13.55,printed as WTI-WCS differential with a negative sign (WCS discount); stored as a positive discount
+SCR_MDA_FY2024,FY2024,year,2024-01-01,2024-12-31,wti_wcs_diff_usd_bbl,14.75,US$/bbl,-14.75,printed as WTI-WCS differential with a negative sign (WCS discount); stored as a positive discount
+SCR_MDA_FY2024,FY2023,year,2023-01-01,2023-12-31,wti_wcs_diff_usd_bbl,18.7,US$/bbl,-18.7,printed as WTI-WCS differential with a negative sign (WCS discount); stored as a positive discount
+SCR_MDA_FY2024,2024Q4,quarter,2024-10-01,2024-12-31,fx_cad_per_usd,1.3992,C$ per US$1,1.3992,
+SCR_MDA_FY2024,2023Q4,quarter,2023-10-01,2023-12-31,fx_cad_per_usd,1.3618,C$ per US$1,1.3618,
+SCR_MDA_FY2024,2024Q3,quarter,2024-07-01,2024-09-30,fx_cad_per_usd,1.3636,C$ per US$1,1.3636,
+SCR_MDA_FY2024,FY2024,year,2024-01-01,2024-12-31,fx_cad_per_usd,1.37,C$ per US$1,1.37,
+SCR_MDA_FY2024,FY2023,year,2023-01-01,2023-12-31,fx_cad_per_usd,1.3495,C$ per US$1,1.3495,
+SCR_MDA_FY2024,2024Q4,quarter,2024-10-01,2024-12-31,wcs_cad_bbl,80.75,C$/bbl,80.75,
+SCR_MDA_FY2024,2023Q4,quarter,2023-10-01,2023-12-31,wcs_cad_bbl,76.85,C$/bbl,76.85,
+SCR_MDA_FY2024,2024Q3,quarter,2024-07-01,2024-09-30,wcs_cad_bbl,83.96,C$/bbl,83.96,
+SCR_MDA_FY2024,FY2024,year,2024-01-01,2024-12-31,wcs_cad_bbl,83.53,C$/bbl,83.53,
+SCR_MDA_FY2024,FY2023,year,2023-01-01,2023-12-31,wcs_cad_bbl,79.51,C$/bbl,79.51,
+SCR_MDA_Q1_2025,2025Q1,quarter,2025-01-01,2025-03-31,wti_usd_bbl,71.42,US$/bbl,71.42,
+SCR_MDA_Q1_2025,2024Q1,quarter,2024-01-01,2024-03-31,wti_usd_bbl,76.96,US$/bbl,76.96,
+SCR_MDA_Q1_2025,2024Q4,quarter,2024-10-01,2024-12-31,wti_usd_bbl,70.27,US$/bbl,70.27,
+SCR_MDA_Q1_2025,2025Q1,quarter,2025-01-01,2025-03-31,wcs_usd_bbl,58.75,US$/bbl,58.75,
+SCR_MDA_Q1_2025,2024Q1,quarter,2024-01-01,2024-03-31,wcs_usd_bbl,57.65,US$/bbl,57.65,
+SCR_MDA_Q1_2025,2024Q4,quarter,2024-10-01,2024-12-31,wcs_usd_bbl,57.72,US$/bbl,57.72,
+SCR_MDA_Q1_2025,2025Q1,quarter,2025-01-01,2025-03-31,wti_wcs_diff_usd_bbl,12.67,US$/bbl,-12.67,printed as WTI-WCS differential with a negative sign (WCS discount); stored as a positive discount
+SCR_MDA_Q1_2025,2024Q1,quarter,2024-01-01,2024-03-31,wti_wcs_diff_usd_bbl,19.31,US$/bbl,-19.31,printed as WTI-WCS differential with a negative sign (WCS discount); stored as a positive discount
+SCR_MDA_Q1_2025,2024Q4,quarter,2024-10-01,2024-12-31,wti_wcs_diff_usd_bbl,12.55,US$/bbl,-12.55,printed as WTI-WCS differential with a negative sign (WCS discount); stored as a positive discount
+SCR_MDA_Q1_2025,2025Q1,quarter,2025-01-01,2025-03-31,fx_cad_per_usd,1.4348,C$ per US$1,1.4348,
+SCR_MDA_Q1_2025,2024Q1,quarter,2024-01-01,2024-03-31,fx_cad_per_usd,1.3488,C$ per US$1,1.3488,
+SCR_MDA_Q1_2025,2024Q4,quarter,2024-10-01,2024-12-31,fx_cad_per_usd,1.3992,C$ per US$1,1.3992,
+SCR_MDA_Q1_2025,2025Q1,quarter,2025-01-01,2025-03-31,wcs_cad_bbl,84.3,C$/bbl,84.3,
+SCR_MDA_Q1_2025,2024Q1,quarter,2024-01-01,2024-03-31,wcs_cad_bbl,77.77,C$/bbl,77.77,
+SCR_MDA_Q1_2025,2024Q4,quarter,2024-10-01,2024-12-31,wcs_cad_bbl,80.75,C$/bbl,80.75,
+CVE_SUPP_Q4_2021,2021Q4,quarter,2021-10-01,2021-12-31,wti_usd_bbl,77.19,US$/bbl,77.19,
+CVE_SUPP_Q4_2021,2021Q3,quarter,2021-07-01,2021-09-30,wti_usd_bbl,70.56,US$/bbl,70.56,
+CVE_SUPP_Q4_2021,2021Q2,quarter,2021-04-01,2021-06-30,wti_usd_bbl,66.07,US$/bbl,66.07,
+CVE_SUPP_Q4_2021,2021Q1,quarter,2021-01-01,2021-03-31,wti_usd_bbl,57.84,US$/bbl,57.84,
+CVE_SUPP_Q4_2021,FY2021,year,2021-01-01,2021-12-31,wti_usd_bbl,67.91,US$/bbl,67.91,
+CVE_SUPP_Q4_2021,2021Q4,quarter,2021-10-01,2021-12-31,wcs_usd_bbl,62.55,US$/bbl,62.55,
+CVE_SUPP_Q4_2021,2021Q3,quarter,2021-07-01,2021-09-30,wcs_usd_bbl,56.98,US$/bbl,56.98,
+CVE_SUPP_Q4_2021,2021Q2,quarter,2021-04-01,2021-06-30,wcs_usd_bbl,54.58,US$/bbl,54.58,
+CVE_SUPP_Q4_2021,2021Q1,quarter,2021-01-01,2021-03-31,wcs_usd_bbl,45.37,US$/bbl,45.37,
+CVE_SUPP_Q4_2021,FY2021,year,2021-01-01,2021-12-31,wcs_usd_bbl,54.87,US$/bbl,54.87,
+CVE_SUPP_Q4_2021,2021Q4,quarter,2021-10-01,2021-12-31,wti_wcs_diff_usd_bbl,14.64,US$/bbl,14.64,
+CVE_SUPP_Q4_2021,2021Q3,quarter,2021-07-01,2021-09-30,wti_wcs_diff_usd_bbl,13.58,US$/bbl,13.58,
+CVE_SUPP_Q4_2021,2021Q2,quarter,2021-04-01,2021-06-30,wti_wcs_diff_usd_bbl,11.49,US$/bbl,11.49,
+CVE_SUPP_Q4_2021,2021Q1,quarter,2021-01-01,2021-03-31,wti_wcs_diff_usd_bbl,12.47,US$/bbl,12.47,
+CVE_SUPP_Q4_2021,FY2021,year,2021-01-01,2021-12-31,wti_wcs_diff_usd_bbl,13.04,US$/bbl,13.04,
+CVE_SUPP_Q4_2021,2021Q4,quarter,2021-10-01,2021-12-31,fx_usd_per_cad,0.794,US$ per C$1,0.794,
+CVE_SUPP_Q4_2021,2021Q3,quarter,2021-07-01,2021-09-30,fx_usd_per_cad,0.794,US$ per C$1,0.794,
+CVE_SUPP_Q4_2021,2021Q2,quarter,2021-04-01,2021-06-30,fx_usd_per_cad,0.814,US$ per C$1,0.814,
+CVE_SUPP_Q4_2021,2021Q1,quarter,2021-01-01,2021-03-31,fx_usd_per_cad,0.79,US$ per C$1,0.79,
+CVE_SUPP_Q4_2021,FY2021,year,2021-01-01,2021-12-31,fx_usd_per_cad,0.798,US$ per C$1,0.798,
+CVE_SUPP_Q4_2021,2021Q4,quarter,2021-10-01,2021-12-31,wcs_cad_bbl,78.71,C$/bbl,78.71,
+CVE_SUPP_Q4_2021,2021Q3,quarter,2021-07-01,2021-09-30,wcs_cad_bbl,71.8,C$/bbl,71.8,
+CVE_SUPP_Q4_2021,2021Q2,quarter,2021-04-01,2021-06-30,wcs_cad_bbl,66.99,C$/bbl,66.99,
+CVE_SUPP_Q4_2021,2021Q1,quarter,2021-01-01,2021-03-31,wcs_cad_bbl,57.44,C$/bbl,57.44,
+CVE_SUPP_Q4_2021,FY2021,year,2021-01-01,2021-12-31,wcs_cad_bbl,68.73,C$/bbl,68.73,
+CVE_SUPP_Q4_2022,2022Q4,quarter,2022-10-01,2022-12-31,wti_usd_bbl,82.65,US$/bbl,82.65,
+CVE_SUPP_Q4_2022,2022Q3,quarter,2022-07-01,2022-09-30,wti_usd_bbl,91.55,US$/bbl,91.55,
+CVE_SUPP_Q4_2022,2022Q2,quarter,2022-04-01,2022-06-30,wti_usd_bbl,108.41,US$/bbl,108.41,
+CVE_SUPP_Q4_2022,2022Q1,quarter,2022-01-01,2022-03-31,wti_usd_bbl,94.29,US$/bbl,94.29,
+CVE_SUPP_Q4_2022,2021Q4,quarter,2021-10-01,2021-12-31,wti_usd_bbl,77.19,US$/bbl,77.19,
+CVE_SUPP_Q4_2022,FY2022,year,2022-01-01,2022-12-31,wti_usd_bbl,94.23,US$/bbl,94.23,
+CVE_SUPP_Q4_2022,FY2021,year,2021-01-01,2021-12-31,wti_usd_bbl,67.91,US$/bbl,67.91,
+CVE_SUPP_Q4_2022,2022Q4,quarter,2022-10-01,2022-12-31,wcs_usd_bbl,56.99,US$/bbl,56.99,
+CVE_SUPP_Q4_2022,2022Q3,quarter,2022-07-01,2022-09-30,wcs_usd_bbl,71.69,US$/bbl,71.69,
+CVE_SUPP_Q4_2022,2022Q2,quarter,2022-04-01,2022-06-30,wcs_usd_bbl,95.61,US$/bbl,95.61,
+CVE_SUPP_Q4_2022,2022Q1,quarter,2022-01-01,2022-03-31,wcs_usd_bbl,79.76,US$/bbl,79.76,
+CVE_SUPP_Q4_2022,2021Q4,quarter,2021-10-01,2021-12-31,wcs_usd_bbl,62.55,US$/bbl,62.55,
+CVE_SUPP_Q4_2022,FY2022,year,2022-01-01,2022-12-31,wcs_usd_bbl,76.01,US$/bbl,76.01,
+CVE_SUPP_Q4_2022,FY2021,year,2021-01-01,2021-12-31,wcs_usd_bbl,54.87,US$/bbl,54.87,
+CVE_SUPP_Q4_2022,2022Q4,quarter,2022-10-01,2022-12-31,wti_wcs_diff_usd_bbl,25.66,US$/bbl,25.66,
+CVE_SUPP_Q4_2022,2022Q3,quarter,2022-07-01,2022-09-30,wti_wcs_diff_usd_bbl,19.86,US$/bbl,19.86,
+CVE_SUPP_Q4_2022,2022Q2,quarter,2022-04-01,2022-06-30,wti_wcs_diff_usd_bbl,12.8,US$/bbl,12.8,
+CVE_SUPP_Q4_2022,2022Q1,quarter,2022-01-01,2022-03-31,wti_wcs_diff_usd_bbl,14.53,US$/bbl,14.53,
+CVE_SUPP_Q4_2022,2021Q4,quarter,2021-10-01,2021-12-31,wti_wcs_diff_usd_bbl,14.64,US$/bbl,14.64,
+CVE_SUPP_Q4_2022,FY2022,year,2022-01-01,2022-12-31,wti_wcs_diff_usd_bbl,18.22,US$/bbl,18.22,
+CVE_SUPP_Q4_2022,FY2021,year,2021-01-01,2021-12-31,wti_wcs_diff_usd_bbl,13.04,US$/bbl,13.04,
+CVE_SUPP_Q4_2022,2022Q4,quarter,2022-10-01,2022-12-31,fx_usd_per_cad,0.737,US$ per C$1,0.737,
+CVE_SUPP_Q4_2022,2022Q3,quarter,2022-07-01,2022-09-30,fx_usd_per_cad,0.766,US$ per C$1,0.766,
+CVE_SUPP_Q4_2022,2022Q2,quarter,2022-04-01,2022-06-30,fx_usd_per_cad,0.783,US$ per C$1,0.783,
+CVE_SUPP_Q4_2022,2022Q1,quarter,2022-01-01,2022-03-31,fx_usd_per_cad,0.79,US$ per C$1,0.79,
+CVE_SUPP_Q4_2022,2021Q4,quarter,2021-10-01,2021-12-31,fx_usd_per_cad,0.794,US$ per C$1,0.794,
+CVE_SUPP_Q4_2022,FY2022,year,2022-01-01,2022-12-31,fx_usd_per_cad,0.769,US$ per C$1,0.769,
+CVE_SUPP_Q4_2022,FY2021,year,2021-01-01,2021-12-31,fx_usd_per_cad,0.798,US$ per C$1,0.798,
+CVE_SUPP_Q4_2022,2022Q4,quarter,2022-10-01,2022-12-31,wcs_cad_bbl,77.42,C$/bbl,77.42,
+CVE_SUPP_Q4_2022,2022Q3,quarter,2022-07-01,2022-09-30,wcs_cad_bbl,93.53,C$/bbl,93.53,
+CVE_SUPP_Q4_2022,2022Q2,quarter,2022-04-01,2022-06-30,wcs_cad_bbl,122.07,C$/bbl,122.07,
+CVE_SUPP_Q4_2022,2022Q1,quarter,2022-01-01,2022-03-31,wcs_cad_bbl,101.01,C$/bbl,101.01,
+CVE_SUPP_Q4_2022,2021Q4,quarter,2021-10-01,2021-12-31,wcs_cad_bbl,78.71,C$/bbl,78.71,
+CVE_SUPP_Q4_2022,FY2022,year,2022-01-01,2022-12-31,wcs_cad_bbl,98.51,C$/bbl,98.51,
+CVE_SUPP_Q4_2022,FY2021,year,2021-01-01,2021-12-31,wcs_cad_bbl,68.73,C$/bbl,68.73,
+CVE_SUPP_Q4_2023,2023Q4,quarter,2023-10-01,2023-12-31,wti_usd_bbl,78.32,US$/bbl,78.32,
+CVE_SUPP_Q4_2023,2023Q3,quarter,2023-07-01,2023-09-30,wti_usd_bbl,82.26,US$/bbl,82.26,
+CVE_SUPP_Q4_2023,2023Q2,quarter,2023-04-01,2023-06-30,wti_usd_bbl,73.78,US$/bbl,73.78,
+CVE_SUPP_Q4_2023,2023Q1,quarter,2023-01-01,2023-03-31,wti_usd_bbl,76.13,US$/bbl,76.13,
+CVE_SUPP_Q4_2023,2022Q4,quarter,2022-10-01,2022-12-31,wti_usd_bbl,82.65,US$/bbl,82.65,
+CVE_SUPP_Q4_2023,FY2023,year,2023-01-01,2023-12-31,wti_usd_bbl,77.62,US$/bbl,77.62,
+CVE_SUPP_Q4_2023,FY2022,year,2022-01-01,2022-12-31,wti_usd_bbl,94.23,US$/bbl,94.23,
+CVE_SUPP_Q4_2023,2023Q4,quarter,2023-10-01,2023-12-31,wcs_usd_bbl,56.43,US$/bbl,56.43,
+CVE_SUPP_Q4_2023,2023Q3,quarter,2023-07-01,2023-09-30,wcs_usd_bbl,69.35,US$/bbl,69.35,
+CVE_SUPP_Q4_2023,2023Q2,quarter,2023-04-01,2023-06-30,wcs_usd_bbl,58.74,US$/bbl,58.74,
+CVE_SUPP_Q4_2023,2023Q1,quarter,2023-01-01,2023-03-31,wcs_usd_bbl,51.36,US$/bbl,51.36,
+CVE_SUPP_Q4_2023,2022Q4,quarter,2022-10-01,2022-12-31,wcs_usd_bbl,56.99,US$/bbl,56.99,
+CVE_SUPP_Q4_2023,FY2023,year,2023-01-01,2023-12-31,wcs_usd_bbl,58.97,US$/bbl,58.97,
+CVE_SUPP_Q4_2023,FY2022,year,2022-01-01,2022-12-31,wcs_usd_bbl,76.01,US$/bbl,76.01,
+CVE_SUPP_Q4_2023,2023Q4,quarter,2023-10-01,2023-12-31,wti_wcs_diff_usd_bbl,21.89,US$/bbl,21.89,
+CVE_SUPP_Q4_2023,2023Q3,quarter,2023-07-01,2023-09-30,wti_wcs_diff_usd_bbl,12.91,US$/bbl,12.91,
+CVE_SUPP_Q4_2023,2023Q2,quarter,2023-04-01,2023-06-30,wti_wcs_diff_usd_bbl,15.04,US$/bbl,15.04,
+CVE_SUPP_Q4_2023,2023Q1,quarter,2023-01-01,2023-03-31,wti_wcs_diff_usd_bbl,24.77,US$/bbl,24.77,
+CVE_SUPP_Q4_2023,2022Q4,quarter,2022-10-01,2022-12-31,wti_wcs_diff_usd_bbl,25.66,US$/bbl,25.66,
+CVE_SUPP_Q4_2023,FY2023,year,2023-01-01,2023-12-31,wti_wcs_diff_usd_bbl,18.65,US$/bbl,18.65,
+CVE_SUPP_Q4_2023,FY2022,year,2022-01-01,2022-12-31,wti_wcs_diff_usd_bbl,18.22,US$/bbl,18.22,
+CVE_SUPP_Q4_2023,2023Q4,quarter,2023-10-01,2023-12-31,fx_usd_per_cad,0.734,US$ per C$1,0.734,
+CVE_SUPP_Q4_2023,2023Q3,quarter,2023-07-01,2023-09-30,fx_usd_per_cad,0.746,US$ per C$1,0.746,
+CVE_SUPP_Q4_2023,2023Q2,quarter,2023-04-01,2023-06-30,fx_usd_per_cad,0.745,US$ per C$1,0.745,
+CVE_SUPP_Q4_2023,2023Q1,quarter,2023-01-01,2023-03-31,fx_usd_per_cad,0.739,US$ per C$1,0.739,
+CVE_SUPP_Q4_2023,2022Q4,quarter,2022-10-01,2022-12-31,fx_usd_per_cad,0.737,US$ per C$1,0.737,
+CVE_SUPP_Q4_2023,FY2023,year,2023-01-01,2023-12-31,fx_usd_per_cad,0.741,US$ per C$1,0.741,
+CVE_SUPP_Q4_2023,FY2022,year,2022-01-01,2022-12-31,fx_usd_per_cad,0.769,US$ per C$1,0.769,
+CVE_SUPP_Q4_2023,2023Q4,quarter,2023-10-01,2023-12-31,wcs_cad_bbl,76.95,C$/bbl,76.95,
+CVE_SUPP_Q4_2023,2023Q3,quarter,2023-07-01,2023-09-30,wcs_cad_bbl,93.06,C$/bbl,93.06,
+CVE_SUPP_Q4_2023,2023Q2,quarter,2023-04-01,2023-06-30,wcs_cad_bbl,78.9,C$/bbl,78.9,
+CVE_SUPP_Q4_2023,2023Q1,quarter,2023-01-01,2023-03-31,wcs_cad_bbl,69.44,C$/bbl,69.44,
+CVE_SUPP_Q4_2023,2022Q4,quarter,2022-10-01,2022-12-31,wcs_cad_bbl,77.42,C$/bbl,77.42,
+CVE_SUPP_Q4_2023,FY2023,year,2023-01-01,2023-12-31,wcs_cad_bbl,79.59,C$/bbl,79.59,
+CVE_SUPP_Q4_2023,FY2022,year,2022-01-01,2022-12-31,wcs_cad_bbl,98.51,C$/bbl,98.51,
+CVE_XLSX,2026Q1,quarter,2026-01-01,2026-03-31,wti_usd_bbl,71.93,US$/bbl,71.93,quarterly average column of the workbook
+CVE_XLSX,2026Q2,quarter,2026-04-01,2026-06-30,wti_usd_bbl,92.79,US$/bbl,92.79,quarterly average column of the workbook
+CVE_XLSX,2026Q3,quarter,2026-07-01,2026-09-30,wti_usd_bbl,85.79,US$/bbl,85.79,quarterly average column of the workbook
+CVE_XLSX,2026-10,month,2026-10-01,2026-10-31,wti_usd_bbl,96.94,US$/bbl,96.94,monthly average (October 2026 only; partial final quarter)
+CVE_XLSX,2026Q1,quarter,2026-01-01,2026-03-31,wcs_usd_bbl,57.76,US$/bbl,57.76,quarterly average column of the workbook
+CVE_XLSX,2026Q2,quarter,2026-04-01,2026-06-30,wcs_usd_bbl,78.12,US$/bbl,78.12,quarterly average column of the workbook
+CVE_XLSX,2026Q3,quarter,2026-07-01,2026-09-30,wcs_usd_bbl,71.9,US$/bbl,71.9,quarterly average column of the workbook
+CVE_XLSX,2026-10,month,2026-10-01,2026-10-31,wcs_usd_bbl,80.42,US$/bbl,80.42,monthly average (October 2026 only; partial final quarter)
+CVE_XLSX,2026Q1,quarter,2026-01-01,2026-03-31,wti_wcs_diff_usd_bbl,14.17,US$/bbl,14.17,quarterly average column of the workbook
+CVE_XLSX,2026Q2,quarter,2026-04-01,2026-06-30,wti_wcs_diff_usd_bbl,14.67,US$/bbl,14.67,quarterly average column of the workbook
+CVE_XLSX,2026Q3,quarter,2026-07-01,2026-09-30,wti_wcs_diff_usd_bbl,13.89,US$/bbl,13.89,quarterly average column of the workbook
+CVE_XLSX,2026-10,month,2026-10-01,2026-10-31,wti_wcs_diff_usd_bbl,16.52,US$/bbl,16.52,monthly average (October 2026 only; partial final quarter)
+CVE_XLSX,2026Q1,quarter,2026-01-01,2026-03-31,fx_usd_per_cad,0.729,US$ per C$1,0.729,quarterly average column of the workbook
+CVE_XLSX,2026Q2,quarter,2026-04-01,2026-06-30,fx_usd_per_cad,0.7225,US$ per C$1,0.7225,quarterly average column of the workbook
+CVE_XLSX,2026Q3,quarter,2026-07-01,2026-09-30,fx_usd_per_cad,0.7147,US$ per C$1,0.7147,quarterly average column of the workbook
+CVE_XLSX,2026-10,month,2026-10-01,2026-10-31,fx_usd_per_cad,0.7075,US$ per C$1,0.7075,monthly average (October 2026 only; partial final quarter)
+CVE_XLSX,2025Q1,quarter,2025-01-01,2025-03-31,wti_usd_bbl,71.42,US$/bbl,71.42,quarterly average column of the workbook
+CVE_XLSX,2025Q2,quarter,2025-04-01,2025-06-30,wti_usd_bbl,63.7433,US$/bbl,63.7433,quarterly average column of the workbook
+CVE_XLSX,2025Q3,quarter,2025-07-01,2025-09-30,wti_usd_bbl,64.93,US$/bbl,64.93,quarterly average column of the workbook
+CVE_XLSX,2025Q4,quarter,2025-10-01,2025-12-31,wti_usd_bbl,59.14,US$/bbl,59.14,quarterly average column of the workbook
+CVE_XLSX,2025Q1,quarter,2025-01-01,2025-03-31,wcs_usd_bbl,58.75,US$/bbl,58.75,quarterly average column of the workbook
+CVE_XLSX,2025Q2,quarter,2025-04-01,2025-06-30,wcs_usd_bbl,53.4688,US$/bbl,53.4688,quarterly average column of the workbook
+CVE_XLSX,2025Q3,quarter,2025-07-01,2025-09-30,wcs_usd_bbl,54.54,US$/bbl,54.54,quarterly average column of the workbook
+CVE_XLSX,2025Q4,quarter,2025-10-01,2025-12-31,wcs_usd_bbl,47.94,US$/bbl,47.94,quarterly average column of the workbook
+CVE_XLSX,2025Q1,quarter,2025-01-01,2025-03-31,wti_wcs_diff_usd_bbl,12.67,US$/bbl,12.67,quarterly average column of the workbook
+CVE_XLSX,2025Q2,quarter,2025-04-01,2025-06-30,wti_wcs_diff_usd_bbl,10.2745,US$/bbl,10.2745,quarterly average column of the workbook
+CVE_XLSX,2025Q3,quarter,2025-07-01,2025-09-30,wti_wcs_diff_usd_bbl,10.39,US$/bbl,10.39,quarterly average column of the workbook
+CVE_XLSX,2025Q4,quarter,2025-10-01,2025-12-31,wti_wcs_diff_usd_bbl,11.2,US$/bbl,11.2,quarterly average column of the workbook
+CVE_XLSX,2025Q1,quarter,2025-01-01,2025-03-31,fx_usd_per_cad,0.6968,US$ per C$1,0.6968,quarterly average column of the workbook
+CVE_XLSX,2025Q2,quarter,2025-04-01,2025-06-30,fx_usd_per_cad,0.7226,US$ per C$1,0.7226,quarterly average column of the workbook
+CVE_XLSX,2025Q3,quarter,2025-07-01,2025-09-30,fx_usd_per_cad,0.7261,US$ per C$1,0.7261,quarterly average column of the workbook
+CVE_XLSX,2025Q4,quarter,2025-10-01,2025-12-31,fx_usd_per_cad,0.717,US$ per C$1,0.717,quarterly average column of the workbook
+CVE_XLSX,2024Q1,quarter,2024-01-01,2024-03-31,wti_usd_bbl,76.96,US$/bbl,76.96,quarterly average column of the workbook
+CVE_XLSX,2024Q2,quarter,2024-04-01,2024-06-30,wti_usd_bbl,80.57,US$/bbl,80.57,quarterly average column of the workbook
+CVE_XLSX,2024Q3,quarter,2024-07-01,2024-09-30,wti_usd_bbl,75.09,US$/bbl,75.09,quarterly average column of the workbook
+CVE_XLSX,2024Q4,quarter,2024-10-01,2024-12-31,wti_usd_bbl,70.27,US$/bbl,70.27,quarterly average column of the workbook
+CVE_XLSX,2024Q1,quarter,2024-01-01,2024-03-31,wcs_usd_bbl,57.65,US$/bbl,57.65,quarterly average column of the workbook
+CVE_XLSX,2024Q2,quarter,2024-04-01,2024-06-30,wcs_usd_bbl,66.96,US$/bbl,66.96,quarterly average column of the workbook
+CVE_XLSX,2024Q3,quarter,2024-07-01,2024-09-30,wcs_usd_bbl,61.54,US$/bbl,61.54,quarterly average column of the workbook
+CVE_XLSX,2024Q4,quarter,2024-10-01,2024-12-31,wcs_usd_bbl,57.71,US$/bbl,57.71,quarterly average column of the workbook
+CVE_XLSX,2024Q1,quarter,2024-01-01,2024-03-31,wti_wcs_diff_usd_bbl,19.31,US$/bbl,19.31,quarterly average column of the workbook
+CVE_XLSX,2024Q2,quarter,2024-04-01,2024-06-30,wti_wcs_diff_usd_bbl,13.61,US$/bbl,13.61,quarterly average column of the workbook
+CVE_XLSX,2024Q3,quarter,2024-07-01,2024-09-30,wti_wcs_diff_usd_bbl,13.55,US$/bbl,13.55,quarterly average column of the workbook
+CVE_XLSX,2024Q4,quarter,2024-10-01,2024-12-31,wti_wcs_diff_usd_bbl,12.56,US$/bbl,12.56,quarterly average column of the workbook
+CVE_XLSX,2024Q1,quarter,2024-01-01,2024-03-31,fx_usd_per_cad,0.741,US$ per C$1,0.741,quarterly average column of the workbook
+CVE_XLSX,2024Q2,quarter,2024-04-01,2024-06-30,fx_usd_per_cad,0.731,US$ per C$1,0.731,quarterly average column of the workbook
+CVE_XLSX,2024Q3,quarter,2024-07-01,2024-09-30,fx_usd_per_cad,0.7334,US$ per C$1,0.7334,quarterly average column of the workbook
+CVE_XLSX,2024Q4,quarter,2024-10-01,2024-12-31,fx_usd_per_cad,0.7154,US$ per C$1,0.7154,quarterly average column of the workbook

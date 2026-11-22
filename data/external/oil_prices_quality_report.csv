@@ -1,0 +1,31 @@
+check,passed,severity,detail
+every value cites a listed source,True,error,unknown source ids: []
+benchmark values are numeric,True,error,0 missing values
+period start is before period end,True,error,period dates checked in both inputs
+quarter labels match their dates,True,error,0 mismatched rows
+no duplicate rows within a source,True,error,0 duplicates
+one unit per metric after conversion,True,error,0 rows with unexpected units: []
+sources agree within 2% where they overlap,True,error,70 overlapping figures; largest gaps: FY2023 wti_wcs_diff_usd_bbl 18.65-18.7; 2023Q4 wcs_cad_bbl 76.85-76.95; FY2023 wcs_cad_bbl 79.51-79.59
+sources agree within 0.5% where they overlap,True,warning,0 of 70 overlapping figures differ by more than 0.5%
+every quarter 2021Q1-2026Q4 has WTI and C$ WCS,True,error,missing: []
+C$ WCS = US$ WCS x exchange rate (within 1%),True,error,24 quarters checked; largest gap 0.16% in 2026Q2
+WTI - WCS = reported differential (within US$0.10),True,error,24 quarters checked; largest gap US$0.02
+wti_usd_bbl within plausible range 30-150,True,error,"min 57.84, max 108.41"
+wcs_usd_bbl within plausible range 20-130,True,error,"min 45.37, max 95.61"
+wcs_cad_bbl within plausible range 25-170,True,error,"min 57.44, max 122.07"
+fx_cad_per_usd within plausible range 1.15-1.5,True,error,"min 1.23, max 1.43"
+wti_wcs_diff_usd_bbl within plausible range 3-40,True,error,"min 10.27, max 25.66"
+"6-month, 9-month and annual averages match their quarters (within 0.5%)",True,error,34 multi-quarter figures checked; largest gap 0.25%
+segment: sales net of blending adds up (within C$0.02),True,error,8 rows checked
+segment: field operating netback adds up (within C$0.02),True,error,8 rows checked
+segment: royalty rate = royalties / sales (within 0.15 points),True,error,largest gap 0.04 points
+segment: duplicate periods agree exactly,True,error,conflicting periods: []
+segment: realized price tracks WCS (ratio 0.9-1.2),True,error,ratio range 1.043-1.098
+segment: rebuilt netback equals reported netback in reported quarters,True,error,5 reported quarters
+value cases are ordered low < base < high in every quarter,True,error,0 quarters out of order
+every quarter has a positive base value,True,error,min C$32.88/bbl
+estimation parameter: realized_to_wcs,True,info,"median 1.0510 (range 1.0431-1.0980, n=5 reported quarters)"
+estimation parameter: royalty_share,True,info,"median 0.1052 (range 0.0960-0.1391, n=5 reported quarters)"
+estimation parameter: transport_cad_boe,True,info,"median 14.4600 (range 13.9100-14.9700, n=5 reported quarters)"
+estimation parameter: opex_energy_cad_boe,True,info,"median 6.6800 (range 5.2600-7.4900, n=5 reported quarters)"
+estimation parameter: opex_nonenergy_cad_boe,True,info,"median 10.7600 (range 10.0900-11.9000, n=5 reported quarters)"

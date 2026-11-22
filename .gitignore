@@ -6,3 +6,14 @@ datasets/*.parquet
 .vscode
 __pycache__/
 .ipynb_checkpoints/
+cache/
+logs/
+.DS_Store
+
+# PyInstaller output
+build/
+dist/
+
+# Python virtual environments
+.venv/
+venv/

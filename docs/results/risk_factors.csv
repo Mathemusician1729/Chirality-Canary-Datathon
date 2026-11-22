@@ -1,0 +1,14 @@
+factor,share_of_importance,note
+Service jobs in the past year,0.24272342900478688,share of the gain of the 25 most important model inputs
+Repairs in the past year,0.21204622108687407,share of the gain of the 25 most important model inputs
+"What the last job report mentions (broken rods, sand, ...)",0.11911794474111116,share of the gain of the 25 most important model inputs
+Pump speed,0.09046782742074816,share of the gain of the 25 most important model inputs
+Tubing pressure,0.05331447844469977,share of the gain of the 25 most important model inputs
+Pump efficiency,0.053151969071900416,share of the gain of the 25 most important model inputs
+Days since the last service job,0.05199587169172257,share of the gain of the 25 most important model inputs
+Run life: days since the last repair,0.04788752070568982,share of the gain of the 25 most important model inputs
+Recent oil rate,0.04312770670764564,share of the gain of the 25 most important model inputs
+Casing pressure,0.04209705515910238,share of the gain of the 25 most important model inputs
+Pump size,0.020317948162361116,share of the gain of the 25 most important model inputs
+Well age,0.01251749826799221,share of the gain of the 25 most important model inputs
+Recent equipment downtime,0.011234529535365745,share of the gain of the 25 most important model inputs
