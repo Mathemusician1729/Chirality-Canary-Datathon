@@ -1,6 +1,6 @@
 # External data: value of a lost barrel (2021Q1–2026Q4)
 
-The competition data records lost oil in m³ but not what that oil was worth. This folder holds a cleaned quarterly price table built only from **public** sources. Strathcona's own quarterly reports come first; Cenovus's published benchmark tables fill the quarters before Strathcona was a public company.
+The data records lost oil in m³ but not what that oil was worth. This folder holds a cleaned quarterly price table built only from **public** sources. Strathcona's own quarterly reports come first; Cenovus's published benchmark tables fill the quarters before Strathcona was a public company.
 
 ## Files
 
