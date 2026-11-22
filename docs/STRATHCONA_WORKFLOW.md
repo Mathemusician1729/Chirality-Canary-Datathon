@@ -183,8 +183,19 @@ failure a visit really prevents. Today that is an assumption, and it decides whe
 
 ## What it would take to run this for real
 
-1. **Live data:** connect the engine to the same Canary datasets the field already writes to. The engine
-   reads its daily values from Canary, so only the tag mapping changes.
+1. **Connect to the real data feed.** For the datathon we loaded the competition files into Canary
+   ourselves, and the replay fed July–October in one day at a time as if it were live. In operations,
+   field data reaches Canary automatically every day, and WellWatch's **live mode** is already built to
+   pick up each new day and score it. Switching over needs four things:
+   - **Tag mapping:** a table from WellWatch's signals (oil rate, pump efficiency, torque…) to the
+     company's own Canary tag names and units. Today the tags use names we chose
+     (`Wells.<Field>.<UWI>.<Signal>`).
+   - **Sampling rate:** nothing to change. Field sensors often report every few seconds or minutes, and the
+     engine already asks Canary for daily averages.
+   - **"New day" signal:** live mode currently waits for a data-day tag written by our replay. It would
+     instead watch the latest timestamp on the incoming tags.
+   - **Jobs and failure records:** these usually live in the maintenance system, not Canary, so they need
+     a daily export into WellWatch.
 2. **Feedback loop:** make closing alerts with an outcome part of the routine for 2–3 months, to measure
    visit effectiveness.
 3. **Crew zones and costs:** confirm crews per field, travel times and the cost of an inspection visit
