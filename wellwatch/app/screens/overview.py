@@ -1,4 +1,4 @@
-"""Fleet overview: KPI tiles, a risk map of every scored well, top-risk wells and a field summary.
+"""Fleet overview: KPI tiles, a map of every scored well on a real basemap, top-risk wells and a field summary.
 
 Reads only the local alert database (daily scores, alerts) and the well register, so it never makes
 fleet-wide Canary reads.
@@ -6,13 +6,12 @@ fleet-wide Canary reads.
 
 from __future__ import annotations
 
-import numpy as np
 import pandas as pd
-import pyqtgraph as pg
 from PySide6.QtWidgets import QComboBox, QGridLayout, QHBoxLayout, QLabel, QSplitter, QVBoxLayout, QWidget
 from PySide6.QtCore import Qt
 
-from ..theme import LEVEL_COLORS, PALETTES, money
+from ..map_view import WellMap
+from ..theme import LEVEL_COLORS, money
 from ..widgets import DataTable, Tile, muted, title
 from ..workers import run_task
 
@@ -48,32 +47,25 @@ class OverviewScreen(QWidget):
         left = QWidget()
         ll = QVBoxLayout(left)
         ll.setContentsMargins(0, 0, 0, 0)
-        ll.addWidget(QLabel("<b>Well map</b> (colour = alert level, size = expected loss; click a well to open it)"))
-        self.map = pg.PlotWidget()
-        self.map.setAspectLocked(False)
-        self.map.setLabel("bottom", "Longitude")
-        self.map.setLabel("left", "Latitude")
-        self.map.showGrid(x=True, y=True, alpha=0.15)
-        self.scatter = pg.ScatterPlotItem(hoverable=True, hoverPen=pg.mkPen("k", width=2), tip=self._tip)
-        self.scatter.sigClicked.connect(self._clicked)
-        self.map.addItem(self.scatter)
+        ll.addWidget(QLabel("<b>Well map</b> (colour = alert level, size = expected loss; click a well for details)"))
+        st = ctx.services.settings
+        self.map = WellMap(st.theme, use_web=not st.offline)
         ll.addWidget(self.map, 1)
         split.addWidget(left)
 
         right = QWidget()
         rl = QVBoxLayout(right)
         rl.setContentsMargins(0, 0, 0, 0)
-        rl.addWidget(QLabel("<b>Top 15 wells by expected loss</b> (double-click to open)"))
+        rl.addWidget(QLabel("<b>Top 15 wells by expected loss</b>"))
         self.top = DataTable({"rank": "Rank", "uwi": "Well", "field": "Field", "risk": "7-day risk",
                               "expected_loss": "Expected loss", "level": "Level", "driver": "Why flagged"})
-        self.top.doubleClicked.connect(lambda i: self.ctx.open_well(self.top.row_at(i)["uwi"]))
         rl.addWidget(self.top, 3)
         rl.addWidget(QLabel("<b>Fields</b>"))
         self.fields = DataTable({"field": "Field", "wells": "Running wells", "expected_loss": "Expected loss",
                                  "open_alerts": "Open alerts"})
         rl.addWidget(self.fields, 2)
         split.addWidget(right)
-        split.setSizes([520, 760])
+        split.setSizes([640, 700])
         lay.addWidget(split, 1)
         self.note = muted("")
         lay.addWidget(self.note)
@@ -81,8 +73,7 @@ class OverviewScreen(QWidget):
 
     # ------------------------------------------------------------------
     def apply_theme(self, theme: str):
-        p = PALETTES[theme]
-        self.map.setBackground(p["plot_bg"])
+        self.map.set_theme(theme)
 
     def refresh(self):
         run_task(self.ctx.services.scored_days, on_done=self._got_days, on_error=self.ctx.error)
@@ -124,28 +115,6 @@ class OverviewScreen(QWidget):
         self.top.set_df(ov["top"])
         self.top.sortByColumn(0, Qt.AscendingOrder)  # rank 1 first
         self.fields.set_df(ov["fields"])
-        m = ov["map"]
-        self._meta = {i: r for i, r in enumerate(m.itertuples(index=False))}
-        if len(m):
-            el = m["expected_loss"].clip(lower=0).to_numpy()
-            size = 5 + 18 * np.sqrt(el / max(el.max(), 1))
-            brushes = [pg.mkBrush(LEVEL_COLORS.get(int(l), "#7f8c8d") + ("ff" if l >= 2 else ("cc" if l == 1 else "55")))
-                       for l in m["level"]]
-            self.scatter.setData(x=m["lon"].to_numpy(float), y=m["lat"].to_numpy(float), size=size, brush=brushes,
-                                 pen=None, data=list(range(len(m))))
-        else:
-            self.scatter.clear()
+        self.map.set_wells(ov["map"])
         self.note.setText(f"Day {ov['day']:%Y-%m-%d}: scores come from the WellWatch engine (data read from Canary). "
                           "Expected loss = 7-day failure risk x expected cost of one crew-needing failure.")
-
-    def _tip(self, x, y, data):
-        r = self._meta.get(data)
-        if r is None:
-            return ""
-        return f"{r.uwi} ({r.field})\nrisk {r.risk:.1%}, expected loss {money(r.expected_loss)}\n{r.driver}"
-
-    def _clicked(self, _plot, points, *_):
-        if len(points):
-            r = self._meta.get(points[0].data())
-            if r is not None:
-                self.ctx.open_well(r.uwi)

@@ -1,5 +1,5 @@
-"""Main window: left navigation, the six screens, status bar, tray icon with alert notifications,
-keyboard shortcuts (Ctrl+1..6 screens, F5 refresh, Ctrl+F find a well) and the light/dark theme."""
+"""Main window: left navigation, the five screens, status bar, tray icon with alert notifications,
+keyboard shortcuts (Ctrl+1..5 screens, F5 refresh) and the light/dark theme."""
 
 from __future__ import annotations
 
@@ -18,12 +18,11 @@ from .screens.inbox import InboxScreen
 from .screens.overview import OverviewScreen
 from .screens.planner import PlannerScreen
 from .screens.settings import SettingsScreen
-from .screens.well import WellScreen
 from .services import Services
 from .theme import ACCENT, PALETTES, stylesheet
 from .workers import run_task, tracker
 
-SCREENS = ["Fleet overview", "Alert inbox", "Well detail", "Crew planner", "Replay & engine", "Settings & health"]
+SCREENS = ["Fleet overview", "Alert inbox", "Crew planner", "Replay & engine", "Settings & health"]
 
 
 def app_icon() -> QIcon:
@@ -66,11 +65,10 @@ class MainWindow(QMainWindow):
 
         self.overview = OverviewScreen(self)
         self.inbox = InboxScreen(self)
-        self.well = WellScreen(self)
         self.planner = PlannerScreen(self)
         self.engine = EngineScreen(self)
         self.settings_screen = SettingsScreen(self)
-        self.screens = [self.overview, self.inbox, self.well, self.planner, self.engine, self.settings_screen]
+        self.screens = [self.overview, self.inbox, self.planner, self.engine, self.settings_screen]
         for s in self.screens:
             self.stack.addWidget(s)
         self.nav.currentRowChanged.connect(self._goto)
@@ -86,7 +84,6 @@ class MainWindow(QMainWindow):
         for i in range(len(SCREENS)):
             QShortcut(QKeySequence(f"Ctrl+{i + 1}"), self, activated=lambda i=i: self.nav.setCurrentRow(i))
         QShortcut(QKeySequence("F5"), self, activated=self.refresh_current)
-        QShortcut(QKeySequence("Ctrl+F"), self, activated=self._find)
 
         # tray + notifications
         self.tray = None
@@ -108,7 +105,6 @@ class MainWindow(QMainWindow):
         self.apply_theme(self.services.settings.theme)
         self.nav.setCurrentRow(0)
         self.connection_changed(retest=True)
-        run_task(lambda: self.services.registry()["uwi"].tolist(), on_done=self.well.set_wells, on_error=self.error)
         if start_timers:
             self.t_status = QTimer(self, timeout=self._status_tick)
             self.t_status.start(5000)
@@ -117,12 +113,6 @@ class MainWindow(QMainWindow):
             QTimer.singleShot(2000, self.check_notifications)
 
     # ------------------------------------------------------------------ context API used by screens
-    def open_well(self, uwi: str, day=None):
-        if not uwi:
-            return
-        self.nav.setCurrentRow(2)
-        self.well.open(uwi, day if day is not None else self.overview.selected_day())
-
     def status(self, msg: str):
         self.statusBar().showMessage(str(msg), 12_000)
 
@@ -163,16 +153,9 @@ class MainWindow(QMainWindow):
     def refresh_current(self):
         self.services.clear_cache()
         s = self.stack.currentWidget()
-        if s is self.well:
-            s.load_trends()
-        elif hasattr(s, "refresh"):
+        if hasattr(s, "refresh"):
             s.refresh()
         self.s_refresh.setText(f"refreshed {time.strftime('%H:%M:%S')}")
-
-    def _find(self):
-        self.nav.setCurrentRow(2)
-        self.well.search.setFocus()
-        self.well.search.selectAll()
 
     def _status_tick(self):
         eng = self.services.engine_status()

@@ -62,24 +62,21 @@ def shot(win, name):
 def test_every_screen_loads_and_screenshots(window):
     app, win = window
     timings = {}
-    for i, name in enumerate(["1_overview", "2_inbox", "3_well", "4_planner", "5_engine", "6_settings"]):
+    for i, name in enumerate(["1_overview", "2_inbox", "3_planner", "4_engine", "5_settings"]):
         win.nav.setCurrentRow(i)
         timings[name] = wait_idle(app)
-        if name == "3_well":
-            uwi = win.overview.top.model_.df["uwi"].iloc[0] if len(win.overview.top.model_.df) else None
-            assert uwi, "overview top table is empty"
-            win.open_well(uwi)
-            timings[name] = wait_idle(app)
-            assert win.well.f["field"].text() not in ("", "-")
-        if name == "4_planner":
+        if name == "1_overview":
+            assert len(win.overview.map._rows) > 0, "map has no wells"
+        if name == "3_planner":
             win.planner.solver.setCurrentText("highs")
             win.planner.budget.setValue(15_000)
             win.planner.solve()
-            timings["4_planner_solve"] = wait_idle(app, timeout=300)
+            timings["3_planner_solve"] = wait_idle(app, timeout=300)
             assert win.planner.res is not None and "loss_with_plan" in win.planner.res
-        if name == "6_settings":
+            assert win.planner.t_before.value.text() != "-"
+        if name == "5_settings":
             win.settings_screen.quality()
-            timings["6_settings_quality"] = wait_idle(app, timeout=300)
+            timings["5_settings_quality"] = wait_idle(app, timeout=300)
         assert shot(win, name).exists()
     print("\nscreen load timings (s):", {k: round(v, 1) for k, v in timings.items()})
     assert len(win.overview.top.model_.df) > 0

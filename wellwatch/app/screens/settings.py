@@ -1,4 +1,4 @@
-"""Settings & health: Canary connection and token, Axiom URL, theme, notifications, offline mode, the
+"""Settings & health: Canary connection and token, theme, notifications, offline mode, the
 model card and a data-quality check (sensors that stopped changing)."""
 
 from __future__ import annotations
@@ -34,8 +34,6 @@ class SettingsScreen(QWidget):
         b_test = QPushButton("Test connection")
         b_test.clicked.connect(self.test)
         f.addRow(b_test, self.conn)
-        self.axiom = QLineEdit(s.axiom_url_template)
-        f.addRow("Axiom URL ({field}, {uwi})", self.axiom)
         self.theme = QComboBox(); self.theme.addItems(["light", "dark"]); self.theme.setCurrentText(s.theme)
         f.addRow("Theme", self.theme)
         self.operator = QLineEdit(s.operator)
@@ -110,7 +108,7 @@ class SettingsScreen(QWidget):
     def save(self, quiet: bool = False):
         s = self.ctx.services.settings
         s.canary_host, s.read_port, s.write_port = self.host.text().strip(), self.rport.value(), self.wport.value()
-        s.axiom_url_template, s.theme, s.operator = self.axiom.text().strip(), self.theme.currentText(), self.operator.text().strip()
+        s.theme, s.operator = self.theme.currentText(), self.operator.text().strip()
         s.notifications, s.minimise_to_tray, s.offline = self.notify.isChecked(), self.tray.isChecked(), self.offline.isChecked()
         s.save()
         self.ctx.apply_theme(s.theme)

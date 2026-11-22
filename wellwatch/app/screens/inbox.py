@@ -89,7 +89,6 @@ class InboxScreen(QWidget):
 
         split = QSplitter(Qt.Vertical)
         self.table = DataTable(HEADERS)
-        self.table.doubleClicked.connect(lambda i: self.ctx.open_well(self.table.row_at(i)["uwi"]))
         self.table.clicked.connect(lambda _: self._selected())
         split.addWidget(self.table)
         bottom = QWidget()
