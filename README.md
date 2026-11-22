@@ -17,7 +17,7 @@ Our team then, wanted to focus our project on what factors contribute the most t
 ## Features
 | Feature | What it does | How to Run |
 |---|---|---|
-| **Canary Labs Integration** | **Utilized Canary labs to load and store historical daily well data into Canary as `Wells.<Field>.<UWI>.<Signal>` tags, paired with an Axiom Dashboard to create the alert dashboard and application.** | `python -m wellwatch.backfill --all-fields --until 2026-06-30` |
+| **Canary Labs Integration** | **Utilized Canary labs to load and store historical daily well data into Canary as `Wells.<Field>.<UWI>.<Signal>` tags. The engine reads its inputs back from Canary and writes risk, alerts and planned visits to Canary as `WellWatch.*` tags; a Canary asset view groups each well's tags, and a Canary Calcs & Events job raises an alarm for wells at warning level.** | `python -m wellwatch.backfill --all-fields --until 2026-06-30` |
 | Risk model | XGBoost, 7-day failure risk, trained on 2021–2024, tested on Jul 2025 – Jun 2026 | `python -m wellwatch.train` |
 | Engine + replay | Feeds the held-back Jul–Oct 2026 days into Canary, reads them back, scores every running well, manages alerts (ISA-18.2 style) and writes `WellWatch.*` tags | `python -m wellwatch.engine replay --seconds-per-day 0` (or `live`) |
 | Scoreboard | Did warnings come before real failures? Model vs a simple rule | `python -m wellwatch.scoreboard` |
