@@ -13,3 +13,7 @@ logs/
 # PyInstaller output
 build/
 dist/
+
+# Python virtual environments
+.venv/
+venv/

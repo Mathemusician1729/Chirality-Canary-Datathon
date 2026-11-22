@@ -24,8 +24,8 @@ Store token). It goes to Windows Credential Manager and is never written to a fi
 asset. The Calcs & Events job "WellWatch warning" raises a Canary event while a well's `AlertLevel` is
 2 or higher.
 
-**Without Canary:** the app's offline mode (Settings & health) works from the competition files and a
-copy of `cache/alerts.db` from a replay.
+**Without Canary:** step-by-step guide in [docs/RUN_OFFLINE.md](docs/RUN_OFFLINE.md). The app's offline
+mode works from the competition files and a copy of `cache/alerts.db` from a replay.
 
 Never commit data, `cache/`, `logs/`, `dist/`, licence files or tokens. The repository is public.
 
