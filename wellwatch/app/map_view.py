@@ -1,4 +1,5 @@
-"""Well map on a real basemap: Leaflet with Esri light / dark grey canvas tiles, shown in Qt WebEngine.
+"""Well map on a real basemap: Leaflet in Qt WebEngine, with Esri satellite imagery (default), a terrain map
+or a light map (switch in the top-right corner; the choice is remembered).
 
 Each scored well is a circle: colour = alert level, size = expected loss; click it for a popup with the
 risk, expected loss and the main reason. Only map tiles and the Leaflet library (pinned version, checked
@@ -43,13 +44,30 @@ html, body, #map { height: 100%; margin: 0; background: __BG__; font-family: 'Se
 </style></head><body><div id="map"></div><script>
 var ok = (typeof L !== 'undefined'), map = null, layer = null, fitted = false;
 if (ok) {
-  map = L.map('map', {preferCanvas: true}).setView([52.6, -110], 6);
-  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/__STYLE__/MapServer/tile/{z}/{y}/{x}', {
-    maxZoom: 16, attribution: 'Tiles &copy; Esri &mdash; Esri, HERE, Garmin, &copy; OpenStreetMap contributors'
-  }).addTo(map);
-  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/__LABELS__/MapServer/tile/{z}/{y}/{x}', {
-    maxZoom: 16, pane: 'shadowPane'
-  }).addTo(map);
+  map = L.map('map', {preferCanvas: true, maxZoom: 17}).setView([52.6, -110], 6);
+  var esri = 'https://server.arcgisonline.com/ArcGIS/rest/services/';
+  function tiles(path, extra) {
+    return L.tileLayer(esri + path + '/MapServer/tile/{z}/{y}/{x}', Object.assign({maxZoom: 17}, extra || {}));
+  }
+  var bases = {
+    'Satellite': L.layerGroup([
+      tiles('World_Imagery', {attribution: 'Imagery &copy; Esri &mdash; Esri, Maxar, Earthstar Geographics, ' +
+                                           'and the GIS User Community'}),
+      tiles('Reference/World_Boundaries_and_Places', {pane: 'shadowPane'})]),
+    'Terrain': tiles('World_Topo_Map', {attribution: 'Tiles &copy; Esri &mdash; Esri, HERE, Garmin, FAO, NOAA, ' +
+                                                     'USGS, &copy; OpenStreetMap contributors'}),
+    'Light': L.layerGroup([
+      tiles('Canvas/__STYLE__', {maxZoom: 16, attribution: 'Tiles &copy; Esri &mdash; Esri, HERE, Garmin, ' +
+                                                           '&copy; OpenStreetMap contributors'}),
+      tiles('Canvas/__LABELS__', {maxZoom: 16, pane: 'shadowPane'})])
+  };
+  var start = 'Satellite';
+  try { var saved = window.localStorage.getItem('wellwatch.basemap'); if (bases[saved]) { start = saved; } } catch (e) {}
+  bases[start].addTo(map);
+  L.control.layers(bases, null, {position: 'topright', collapsed: false}).addTo(map);
+  map.on('baselayerchange', function (e) {
+    try { window.localStorage.setItem('wellwatch.basemap', e.name); } catch (err) {}
+  });
   layer = L.layerGroup().addTo(map);
   var legend = L.control({position: 'bottomleft'});
   legend.onAdd = function () { var d = L.DomUtil.create('div', 'legend'); d.innerHTML = __LEGEND__; return d; };
@@ -62,8 +80,9 @@ function setData(rows) {
   layer.clearLayers();
   var pts = [];
   rows.forEach(function (r) {
-    var m = L.circleMarker([r.lat, r.lon], {radius: r.size, color: r.level >= 2 ? '#222' : r.color,
-      weight: r.level >= 2 ? 1.2 : 0.5, fillColor: r.color, fillOpacity: r.opacity});
+    // white ring so wells stand out on satellite imagery as well as on the light map
+    var m = L.circleMarker([r.lat, r.lon], {radius: r.size, color: '#ffffff', weight: r.level >= 2 ? 2 : 1,
+      opacity: 0.95, fillColor: r.color, fillOpacity: r.opacity});
     m.bindTooltip(esc(r.uwi) + ' &middot; ' + esc(r.label));
     m.bindPopup('<b>' + esc(r.uwi) + '</b><br>' + esc(r.field) + '<br>' + esc(r.label) + ' &middot; 7-day risk ' +
                 esc(r.risk) + '<br>Expected loss ' + esc(r.loss) + '<br><i>' + esc(r.driver) + '</i>');
@@ -99,7 +118,7 @@ def map_rows(m: pd.DataFrame) -> list[dict]:
         lvl = int(r.level)
         out.append({"lat": float(r.lat), "lon": float(r.lon), "uwi": str(r.uwi), "field": str(r.field),
                     "level": lvl, "label": level_name(lvl) if lvl else "No alert", "color": _color(lvl),
-                    "opacity": 0.95 if lvl >= 2 else (0.8 if lvl == 1 else 0.35), "size": round(float(s), 1),
+                    "opacity": 0.95 if lvl >= 2 else (0.85 if lvl == 1 else 0.6), "size": round(float(s), 1),
                     "risk": f"{float(r.risk):.1%}", "loss": money(float(r.expected_loss)),
                     "driver": "" if pd.isna(r.driver) else str(r.driver)})
     return out
