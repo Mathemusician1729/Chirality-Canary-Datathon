@@ -6,13 +6,13 @@
 In large oil and gas systems, there are many parts working together in order to maintain a stable, steady pipeline, but consequently, it can also be difficult to keep track of all these parts and catch signs or risks of those parts failing early enough before a downtime is caused in the system, and when downtimes occur, the company has to spend extra costs to fix them, as well as lose out on revenue from potential oil that could have been produced.
 
 ### Research Question
-Our team then, wanted to focus our project on what factors contribute the most to production downtime and losses, how much they affect company costs/revenue, and our goal was to determine how can we alert and notify the company as soon as possible of risks of production failure, and how we can optimize and schedule jobs to resolve them, to minimize the overall costs from sending workers as well as from when the production failures do happen.
+Our team then, wanted to focus our project on what factors contribute the most to production downtime and losses, how much they affect company costs/revenue, and our goal was to determine how can we minimize the cost of downtime-related lost oil, and can we optimize maintenance crew dispatch?
 
 
 ## Our Solution: WellWatch 
 #### ***Solution Category***: *AI/ML Prototype, Analytical Dashboard*
 
-**WellWatch** is an all-in-one centralized platform that both warns a week ahead of crew-needing well failures, and plans optimal crew visits and scheduling to minimise expected losses and costs spent on fixing failures during production. 
+**WellWatch** is an all-in-one platform that both monitors the oil wells for potential risks ofr failure, warns the company a week ahead of crew-needing well failures, and plans optimal crew visits and scheduling to minimise expected losses and costs spent on fixing failures during production. 
 
 ## Features
 | Feature | What it does | How to Run |
