@@ -10,7 +10,7 @@ Our team then, wanted to focus our project on what factors contribute the most t
 
 
 ## Our Solution: WellWatch 
-#### ***Solution Category***: *AI/ML Prototype, Analytical Dashboard*
+#### ***Solution Category***: *AI/ML Prototype & Application, Implementation Plan*
 
 **WellWatch** is an all-in-one platform that both monitors the oil wells for potential risks ofr failure, warns the company a week ahead of crew-needing well failures, and plans optimal crew visits and scheduling to minimise expected losses and costs spent on fixing failures during production. 
 
