@@ -546,9 +546,11 @@ class Services:
         s, f = OUTPUTS / "replay_summary.csv", OUTPUTS / "replay_scoreboard.csv"
         return (pd.read_csv(s) if s.exists() else None), (pd.read_csv(f) if f.exists() else None)
 
-    @staticmethod
-    def run_scoreboard() -> str:
-        r = subprocess.run(config.module_cmd("wellwatch.scoreboard"), cwd=str(config.REPO_ROOT),
+    def run_scoreboard(self) -> str:
+        """Re-score the replay; offline it skips writing the KPI tags to Canary."""
+        offline = self.settings.offline or not self.online
+        r = subprocess.run(config.module_cmd("wellwatch.scoreboard", *(["--no-canary"] if offline else [])),
+                           cwd=str(config.REPO_ROOT),
                            capture_output=True, text=True, encoding="utf-8", errors="replace",
                            creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0)
         if r.returncode != 0:
