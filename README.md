@@ -1,12 +1,26 @@
-# Chirality-Canary-Datathon
+# WellWatch
+**Authored by the Fantastic 4**: Carson Chan, Matthew Tran, Prabhasees Raina, Karanvir Mann
+## Project Overview
+### Motivation
+In large oil and gas systems, there are many parts working together in order to maintain a stable, steady pipeline, but consequently, it can also be difficult to keep track of all these parts and catch signs or risks of those parts failing early enough before a downtime is caused in the system, and when downtimes occur, the company has to spend extra costs to fix them, as well as lose out on revenue from potential oil that could have been produced.
 
-**WellWatch** warns a week ahead of crew-needing well failures and plans crew visits to minimise the
-expected loss, running on Canary Labs historian data. **Results, charts and the profit estimate:
-[docs/RESULTS.md](docs/RESULTS.md).**
+### Research Question
+Our team then, wanted to focus our project on what factors contribute the most to production downtime and losses, how much they affect company costs/revenue, and our goal was to determine how can we alert and notify the company as soon as possible of risks of production failure, and how we can optimize and schedule jobs to resolve them, to minimize the overall costs from sending workers as well as from when the production failures do happen.
+
+[<u><b>Video Link](https://youtu.be/5Z0hkO-mv1E)</u></b>
+
+[<u><b>Project Slides](WellWatch.pdf)</u></b>
+
+
+## What is WellWatch?
+**WellWatch** warns a week ahead of crew-needing well failures and plans crew visits to minimise
+expected losses, running on Canary Labs historian data. 
+
+Results, charts and the profit estimates can be found in
+[docs/RESULTS.md](docs/RESULTS.md).
+
 How a production team would use it day to day, and why each feature helps:
 [docs/STRATHCONA_WORKFLOW.md](docs/STRATHCONA_WORKFLOW.md).
-
-## WellWatch
 
 | Part | What it does | Run |
 |---|---|---|
@@ -34,7 +48,7 @@ Never commit data, `cache/`, `logs/`, `dist/`, licence files or tokens. The repo
 **Known issue:** 6 wells have no field in the source data, so their Canary tags sit under a field
 named `nan` (for example `Wells.nan.<UWI>.OilRate`). They are scored normally.
 
-## Team notebooks: how to run
+## How To Run
 
 1. **Data:** copy the three competition files into the repository root (next to this README):
    `daily_production.parquet`, `well_jobs.parquet`, `production_failures.parquet`.
@@ -55,3 +69,5 @@ named `nan` (for example `Wells.nan.<UWI>.OilRate`). They are scored normally.
 | `datasets/downtime_drivers.ipynb` | Goal analysis: downtime classes, Pareto, explanatory XGBoost + SHAP, failure cross-reference, cost, profit scenarios |
 | `datasets/*.ipynb` (others) | Per-dataset exploration |
 | `outputs/` | Presentation-ready PNG charts and CSV tables produced by `downtime_drivers.ipynb` |
+
+## 
