@@ -48,8 +48,8 @@ class OverviewScreen(QWidget):
         ll = QVBoxLayout(left)
         ll.setContentsMargins(0, 0, 0, 0)
         ll.addWidget(QLabel("<b>Well map</b> (colour = alert level, size = expected loss; click a well for details)"))
-        st = ctx.services.settings
-        self.map = WellMap(st.theme, use_web=not st.offline)
+        # offline mode means "no Canary"; the basemap needs only internet and falls back to a plot without it
+        self.map = WellMap(ctx.services.settings.theme)
         ll.addWidget(self.map, 1)
         split.addWidget(left)
 

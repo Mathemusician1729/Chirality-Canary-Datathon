@@ -4,8 +4,8 @@ Each scored well is a circle: colour = alert level, size = expected loss; click 
 risk, expected loss and the main reason. Only map tiles and the Leaflet library (pinned version, checked
 with a subresource-integrity hash) are fetched from the internet; well data never leaves the app.
 
-Falls back to a plain longitude/latitude scatter plot when offline mode is on, when the map page cannot
-load (no internet), or in offscreen tests.
+Falls back to a plain longitude/latitude scatter plot when the map page cannot load (no internet) or
+in offscreen tests. Canary offline mode does not matter: the basemap needs only internet.
 """
 
 from __future__ import annotations
