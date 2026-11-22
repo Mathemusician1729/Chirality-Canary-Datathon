@@ -28,7 +28,7 @@ import time
 
 import pandas as pd
 
-from . import config
+from . import backup, config
 from .alerts import AlertStore
 from .canary import CanaryReader, CanaryWriter
 from .lock import engine_lock, stop_requested
@@ -143,13 +143,32 @@ class Engine:
         return summary
 
 
+def safe_backup(reason: str):
+    """Back up the alert database; a failed backup is logged and never stops the engine."""
+    try:
+        path = backup.backup_alerts(reason, require_data=True)
+        if path:
+            log.info("backed up the alert database (%s): %s", reason, path.name)
+        return path
+    except Exception as exc:  # noqa: BLE001
+        log.warning("alert database backup (%s) failed: %s", reason, exc)
+        return None
+
+
+def reset_for_fresh(alerts: AlertStore):
+    """Start fresh: back up the current alerts and scores, then clear them and the engine/replay state."""
+    path = safe_backup("pre-fresh")
+    alerts.reset()
+    STATE_FILE.unlink(missing_ok=True)
+    save_replay_state(last_written_day=None)
+    return path
+
+
 def run_replay(start, end, seconds_per_day: float, block: int, fresh: bool, workers: int) -> None:
     start, end = pd.Timestamp(start), pd.Timestamp(end)
     eng = Engine(workers)
     if fresh:
-        eng.alerts.reset()
-        STATE_FILE.unlink(missing_ok=True)
-        save_replay_state(last_written_day=None)
+        reset_for_fresh(eng.alerts)
     last = load_state().get("last_scored_day")
     warmup = pd.date_range(start - pd.Timedelta(days=WARMUP_DAYS), start - pd.Timedelta(days=1), freq="D")
     feed = pd.date_range(start, end, freq="D")
@@ -171,6 +190,8 @@ def run_replay(start, end, seconds_per_day: float, block: int, fresh: bool, work
                     rp.write_day(w, day)
                     time.sleep(max(0.0, seconds_per_day - (time.time() - t0)))
                 eng.process(chunk, w)
+        if load_state().get("last_scored_day") == end.strftime("%Y-%m-%d"):
+            safe_backup("complete")
     except KeyboardInterrupt:
         log.info("stopped by user; resume by running the same command without --fresh")
 
