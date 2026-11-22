@@ -1,0 +1,119 @@
+{
+  "data_years": 5.82,
+  "oil_wells": 1990,
+  "crew_failures": 9903,
+  "crew_failures_per_year": 1702.9523305084745,
+  "crew_failure_hours_down": 1198836.5,
+  "crew_failure_lost_oil_m3": 149058.87965413116,
+  "crew_failure_repair_cad": 144896536.44,
+  "crew_failure_oil_value_cad": {
+    "low": 43778031.676080264,
+    "base": 53911067.78441748,
+    "high": 82555181.30684204
+  },
+  "crew_failure_cost_base_per_year_cad": 34187607.082376875,
+  "avg_failure": {
+    "hours_down": 121.05791174391598,
+    "lost_oil_m3": 15.051891311131088,
+    "repair_cad": 14631.57996970615,
+    "oil_value_base_cad": 5443.912731941581
+  },
+  "lost_oil_share_of_cost_base": 0.27117206102218167,
+  "equipment_downtime_hours_all": 3045895.749985,
+  "equipment_lost_oil_m3_all": 272092.7700869206,
+  "share_of_equipment_downtime_in_crew_failures": 0.39359078524138713,
+  "failure_type_matched_share": 0.24265374129051803,
+  "replay": {
+    "WellWatch model": {
+      "failures": 603,
+      "caught": 39,
+      "missed": 564,
+      "catch_rate": 0.0646766169154228,
+      "median_lead_days": 7.0,
+      "lead_days_p25": 6.0,
+      "lead_days_p75": 7.0,
+      "warnings_per_day": 12.322033898305085,
+      "warning_precision": 0.1100412654745529,
+      "alert_precision": 0.0885416666666666,
+      "value_caught_cad": 1443165.2952148956,
+      "value_all_failures_cad": 15417458.53385661
+    },
+    "Simple rule: shortest run life (same warnings/day)": {
+      "failures": 603,
+      "caught": 69,
+      "missed": 534,
+      "catch_rate": 0.1144278606965174,
+      "median_lead_days": 5.0,
+      "lead_days_p25": 2.0,
+      "lead_days_p75": 7.0,
+      "warnings_per_day": 12.322033898305085,
+      "warning_precision": 0.092847317744154,
+      "alert_precision": NaN,
+      "value_caught_cad": 1279834.0633323097,
+      "value_all_failures_cad": 15417458.53385661
+    }
+  },
+  "model_test": [
+    {
+      "model": "WellWatch model (calibrated)",
+      "PR-AUC": 0.09167405831897996,
+      "ROC-AUC": 0.7447759457458376,
+      "precision@15/day": 0.15363128491620112,
+      "base rate": 0.03679609285869941
+    },
+    {
+      "model": "Baseline: well's historical rate",
+      "PR-AUC": 0.06882180909442384,
+      "ROC-AUC": 0.6530111891209142,
+      "precision@15/day": 0.12830540037243948,
+      "base rate": 0.03679609285869941
+    },
+    {
+      "model": "Baseline: equipment downtime in last 30 days",
+      "PR-AUC": 0.046094903711358846,
+      "ROC-AUC": 0.5750472189808378,
+      "precision@15/day": 0.03929236499068901,
+      "base rate": 0.03679609285869941
+    },
+    {
+      "model": "Baseline: shortest run life since last repair",
+      "PR-AUC": 0.0672083000251863,
+      "ROC-AUC": 0.6793251283888468,
+      "precision@15/day": 0.10074487895716946,
+      "base rate": 0.03679609285869941
+    }
+  ],
+  "planner": {
+    "weeks": 17,
+    "visits": 326,
+    "visit_cost_cad": 489000.0,
+    "expected_loss_no_action_cad": 4891110.841712084,
+    "expected_loss_with_plan_cad": 4723669.509123757,
+    "expected_net_saving_period_cad": 167441.33258832758,
+    "expected_net_saving_per_year_cad": 513580.557938988,
+    "value_failed_on_planned_wells_cad": 1812082.2489046897,
+    "value_caught_in_time_cad": 1337809.902683733,
+    "value_failed_on_rule_wells_cad": 634606.4674733144,
+    "planned_wells_failed": 36,
+    "planned_wells_failed_after_visit": 28,
+    "rule_wells_failed": 29,
+    "oil_share_of_failure_value_base": 0.230542751650748,
+    "per_year_factor": 3.0672268907563027,
+    "robustness_without_best_week": {
+      "dropped_week": "2026-07-06",
+      "dropped_week_value_caught_cad": 430064.8347735937,
+      "break_even_effectiveness": 0.5139108065593813,
+      "net_per_year_cad": {
+        "0.25": -780721.0942249983,
+        "0.50": -41152.0098785678,
+        "0.75": 698417.0744678625
+      },
+      "expected_net_per_year_cad": 521525.6750614899,
+      "value_failed_planned_vs_rule_cad": [
+        1012649.958837481,
+        610244.2842816513
+      ]
+    },
+    "break_even_effectiveness": 0.36552278393143484
+  }
+}

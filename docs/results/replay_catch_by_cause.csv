@@ -1,0 +1,17 @@
+cause,failures,caught_model,caught_rule,catch_rate_model
+Fatigue,266,15,39,0.05639097744360902
+No failure record,133,15,5,0.11278195488721804
+Corrosion,102,3,13,0.029411764705882353
+Load / Excess Stress,36,3,5,0.08333333333333333
+Unknown,15,1,0,0.06666666666666667
+Wear and Tear,11,0,0,0.0
+Other,9,0,3,0.0
+Erosion,8,0,1,0.0
+Reservoir or Fluids,8,2,3,0.25
+Abrasion,5,0,0,0.0
+Unexpected Reservoir Conditions,4,0,0,0.0
+Misuse / Human Error,2,0,0,0.0
+Heat,1,0,0,0.0
+Installation,1,0,0,0.0
+Power loss,1,0,0,0.0
+Torque Break,1,0,0,0.0

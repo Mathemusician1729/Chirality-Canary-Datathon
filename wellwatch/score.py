@@ -102,7 +102,9 @@ def describe(feature: str, value) -> str:
     if feature.startswith("eq_down_hours_prev"):
         return f"{(v or 0):.0f} h of equipment downtime in the last {feature.removeprefix('eq_down_hours_prev')} days"
     if feature == "well_age_years":
-        return f"Well age {v:.0f} years" if v is not None else "Well age"
+        if v is None:
+            return "Well age"
+        return "New well (under 1 year producing)" if v < 1 else f"Well age {v:.0f} years"
     if feature == "pump_displacement":
         return f"Pump size {v:.0f} m3/d per 100 rpm" if v is not None else "Pump size"
     prefix, _, kind = feature.partition("_")
